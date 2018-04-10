@@ -1,3 +1,5 @@
+/Ventanas/
+/imagenes/
 /Administrador.class
 /Asiento.class
 /Charla.class
@@ -5,5 +7,6 @@
 /Expositor.class
 /Main.class
 /Persona.class
+/Principal.class
 /Sala.class
 /Usuario.class

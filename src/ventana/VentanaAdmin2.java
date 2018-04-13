@@ -1,4 +1,5 @@
-package Ventanas;
+package ventana;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -45,17 +46,14 @@ public class VentanaAdmin2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Agregar Charla");
-		btnNewButton.setBounds(160, 80, 127, 23);
-		contentPane.add(btnNewButton);
+		JButton btnCrearCharla = new JButton("Crear Charla");
+		btnCrearCharla.setBackground(Color.WHITE);
+		btnCrearCharla.setBounds(10, 84, 127, 23);
+		contentPane.add(btnCrearCharla);
 		
 		JLabel label = new JLabel("Escoja una opcion\r\n");
 		label.setFont(new Font("Tahoma", Font.BOLD, 15));
 		label.setBounds(147, 29, 140, 19);
 		contentPane.add(label);
-		
-		JButton button = new JButton("Agregar Charla");
-		button.setBounds(10, 118, 127, 23);
-		contentPane.add(button);
 	}
 }

@@ -1,4 +1,5 @@
-package Ventanas;
+package ventana;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -16,7 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import Ventanas.VentanaPrincipal;
+import ventana.VentanaPrincipal;
 import javax.swing.JTextField;
 public class VentanaAdmin extends JFrame {
 

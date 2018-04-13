@@ -1,4 +1,4 @@
-package Ventanas;
+package ventana;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import Ventanas.VentanaAdmin;
-import Ventanas.VentanaUsuario;
+import ventana.VentanaAdmin;
+import ventana.VentanaUsuario;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -87,5 +87,15 @@ public class VentanaPrincipal extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(140, 200, 175, 24);
 		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("Cerrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible (false);
+			}
+		});
+		btnNewButton.setBackground(new Color(255, 153, 0));
+		btnNewButton.setBounds(180, 227, 89, 23);
+		contentPane.add(btnNewButton);
 	}
 }

@@ -1,22 +1,29 @@
 public class Sala {
-	private int idSala, capacTotal, actualCapac;
+	private int capacTotal, actualCapac;
+	private String idSala;
 	private MapaAsientos asientos;
 	
 	
 	public Sala() {
-		idSala=-1;
+		idSala=null;
 		capacTotal=-1;
 		actualCapac=0;
 		asientos=new MapaAsientos();
 	}
-	public Sala(int idSala, int capacTotal) {
+	public Sala(String idSala) {
+		this.idSala=idSala;
+		this.capacTotal=50;//por defecto serán 50 sillas por sala
+		this.actualCapac=0;
+	}
+	public Sala(String idSala, int capacTotal) {//por si la sala tiene otras dimensiones
 		this.idSala=idSala;
 		this.capacTotal=capacTotal;
 		this.actualCapac=0;
 	}
 	
-	public void setIdSala(int id) { this.idSala=id; }
-	public int getIdSala() { return idSala; }
+	
+	public void setIdSala(String id) { this.idSala=id; }
+	public String getIdSala() { return idSala; }
 	public void setCapacTotal(int capacidad) { this.capacTotal=capacidad; }
 	public int getCapacTotal() { return capacTotal; }
 	public void setActualCapac(int capacidad) { this.actualCapac=capacidad; }

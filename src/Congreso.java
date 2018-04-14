@@ -1,12 +1,14 @@
 import java.util.Date;
 
 public class Congreso {
-	private ListaCharlas charlas = new ListaCharlas();
-	private MapaUsuarios usuarios = new MapaUsuarios();
+	private ListaCharlas charlas;
+	private MapaUsuarios usuarios;
+	private MapaSalas salas;
 	
 	public Congreso() {
 		this.charlas=new ListaCharlas();
 		this.usuarios=new MapaUsuarios();
+		this.salas=new MapaSalas();
 	}
 	
 	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, Date fecha) {

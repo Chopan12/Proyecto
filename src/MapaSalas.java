@@ -6,14 +6,13 @@ public class MapaSalas {
 		mapaSalas=new Hashtable<String, Sala>();
 	}
 	
-	public void añadirSala(Sala sala) { //hay que hacer verificaciones correspondientes
+	public void añadirSala(Sala sala) { //se ingresa una sala completa
 		String id=sala.getIdSala();
-		mapaSalas.put(id, sala);
+		if(!mapaSalas.containsValue(sala))mapaSalas.put(id, sala);
 	}
-	public void añadirSala(String idSala) {
-		Sala sala=new Sala(idSala);
-		//verificaciones
-		mapaSalas.put(idSala, sala);
-		
+	public void añadirSala(String idSala, int capacTotal) { //se crea una sala en base a un id y su capacidad máxima
+		Sala sala=new Sala(idSala, capacTotal);
+		if(!mapaSalas.containsKey(idSala))mapaSalas.put(idSala, sala);
 	}
+	
 }

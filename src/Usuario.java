@@ -20,7 +20,25 @@ public class Usuario extends Persona {
 		
 		
 	}
-	//metodo agregar asiento
+	
+	
+	public boolean recorrerAsientos(String idAsiento) {//para recorrer los asientos y verificar si, por id, ya se encuentra en sus asientos asociados
+		if(asientosAsociados.size()==0)return false;//no tiene nada dentro
+		Asiento asiento;
+		String id;
+		for(int i=0; i<asientosAsociados.size(); i++) {
+			asiento=asientosAsociados.get(i);
+			id=asiento.getIdAsiento();
+			if(id.equals(idAsiento))return true;
+		}
+		return false;
+	}
+	public void agregarAsiento(Asiento asiento) {
+		if(!recorrerAsientos(asiento.getIdAsiento())) {
+			asientosAsociados.add(asiento);
+		}
+	}
+	
 	public void setClave(String clave) { this.clave = clave;}
 	public String getClave() { return clave; }
 		

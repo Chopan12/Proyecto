@@ -29,7 +29,7 @@ public class Sala {
 	public void setActualCapac(int capacidad) { this.actualCapac=capacidad; }
 	public int getActualCapac() { return actualCapac; }
 	
-	public void agregarAsiento(Asiento asiento) {
+	public void agregarAsiento(Asiento asiento) {//se agrega un asiento al mapa de asientos
 		asientos.agregarAsiento(asiento);
 	}
 	

@@ -10,7 +10,11 @@ public class Congreso {
 		this.usuarios=new MapaUsuarios();
 		this.salas=new MapaSalas();
 	}
-	
+	public void agregarCharla(Charla charla) {
+		if(!charlas.recorrerCharlas(charla.getIdCharla())) {
+			charlas.agregarCharla(charla);
+		}
+	}
 	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, Date fecha) {
 		charlas.agregarCharla(idCharla,duracion, expositor, sala, fecha);
 	}
@@ -21,6 +25,10 @@ public class Congreso {
 	
 	public void eliminarUsuario(Usuario usuario) {
 		usuarios.eliminarUsuarios(usuario);
+	}
+	
+	public void agregarSala(Sala sala) {
+		salas.añadirSala(sala);
 	}
 	
 	

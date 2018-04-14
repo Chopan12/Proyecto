@@ -11,8 +11,21 @@ public class MapaAsientos {
 	
 	public void agregarAsiento(Asiento asiento) { //hay que verificar que el asiento no se encuentra ya en el usuario, a futuro agregar opcion para meterlo también al arraylist
 		String key=asiento.getIdAsiento();
+		if(mapaAsientos.containsKey(key))return;//cada silla tiene id único, así que basta con esto para saber si el asiento se encuentra agregado o no
+		if(listaAsientos.contains(asiento))return;//también se verifica si existe en la lista, ya que ambas se irán llenando para comodidad futura
 		mapaAsientos.put(key, asiento);
+		listaAsientos.add(asiento);
 	}
+	
+	public boolean verificarAsiento(String idAsiento) {
+		if(mapaAsientos.containsKey(idAsiento))return true;//el asiento se encuentra ingresado en el mapa
+		return false;
+	}
+	public boolean verificarAsiento(Asiento asiento) {
+		if(mapaAsientos.containsValue(asiento) && listaAsientos.contains(asiento))return true;//el asiento se encuentra ingresado
+		return false;
+	}
+	
 
 	
 }

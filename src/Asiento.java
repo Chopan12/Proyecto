@@ -1,22 +1,27 @@
 
 public class Asiento {
 	private String idAsiento;
-	private Sala salaAsociada;
+	private boolean ocupado;
 	
 	public Asiento() {
 		this.idAsiento=null;
-		this.salaAsociada=null;
+		this.ocupado=false;
+		
 	}
 	
-	public Asiento (String idAsiento, Sala sala) {
-		this.idAsiento=null;
-		this.salaAsociada=sala;
+	public Asiento(String idAsiento) {
+		this.idAsiento=idAsiento;
 	}
+	
+	public Asiento(String idAsiento,boolean ocupado) {
+		this.idAsiento=idAsiento;
+		this.ocupado=ocupado;
+	}
+	
 	
 	public void setIdAsiento(String idAsiento) {  this.idAsiento=idAsiento;  }
 	public String getIdAsiento() { return idAsiento; }
-	public void setSalaAsociada(Sala salaAsociada) { this.salaAsociada = salaAsociada; }
-	public Sala getSalaAsociada() { return salaAsociada; }
-	
-	
+	public void setAsientoOcupado() { this.ocupado=true; }
+	public void setAsientoLibre() { this.ocupado=false; }
+	public boolean getEstadoAsiento() { return ocupado; }
 }

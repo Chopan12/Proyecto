@@ -6,8 +6,8 @@ public class Administrador extends Persona{
 		super(); //Herencia de persona, que poseia rut
 	}
 	
-	public Administrador(String nombre, String clave) {
-		super(nombre);
+	public Administrador(String nombre, String rut, String clave) {
+		super(nombre, rut);
 		this.clave=clave;
 	}
 	

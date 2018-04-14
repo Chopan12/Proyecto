@@ -1,22 +1,18 @@
-import java.util.ArrayList;
-
 public class Sala {
 	private int idSala, capacTotal, actualCapac;
-	private ArrayList<Asiento> asientos = new ArrayList<Asiento>();
+	private MapaAsientos asientos;
 	
 	
 	public Sala() {
 		idSala=-1;
 		capacTotal=-1;
 		actualCapac=0;
-		asientos=new ArrayList<Asiento>();
+		asientos=new MapaAsientos();
 	}
-	public Sala(int idSala, int capacTotal, int actualCapac, Asiento asiento) {
+	public Sala(int idSala, int capacTotal) {
 		this.idSala=idSala;
 		this.capacTotal=capacTotal;
-		this.actualCapac=actualCapac;
-		asientos.add(asiento);
-		
+		this.actualCapac=0;
 	}
 	
 	public void setIdSala(int id) { this.idSala=id; }
@@ -26,7 +22,9 @@ public class Sala {
 	public void setActualCapac(int capacidad) { this.actualCapac=capacidad; }
 	public int getActualCapac() { return actualCapac; }
 	
-	
+	public void agregarAsiento(Asiento asiento) {
+		asientos.agregarAsiento(asiento);
+	}
 	
 	
 	

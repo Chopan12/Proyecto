@@ -31,6 +31,23 @@ public class Congreso {
 		salas.añadirSala(sala);
 	}
 	
+	public void mostrarDatosCharlaUsuario(String idAsiento) {
+		Usuario persona;
+		Charla charla;
+		persona=usuarios.obtenerUsuario(idAsiento);
+		//if(persona.equals(null))return;
+		charla=charlas.obtenerCharla(idAsiento);
+		if(charlas.recorrerCharlas(idAsiento) && charla.getSalaAsignada().verificarEstadoAsiento(idAsiento)) {//hay que verificar si existe la sala y si el asiento está ocupado o no, si lo está se puede continuar
+			System.out.println("Usuario: " + persona.getNombre() + "\nRut :" + persona.getRut() + 
+								"\nCharla de: " + charla.getExpositor().getNombre() + "\nTema: " +
+								charla.getExpositor().getTema() + "\nDuración aproximada: " + charla.getDuracion() +
+								"\nSala asignada: " + charla.getIdCharla());
+			
+			//if(persona.getAsiento(idAsiento).getEstadoAsiento()) return; //no debería pasar nunca, si un asiento está asignado a una persona estará siempre ocupado
+		}
+		
+	}
+	
 	
 	
 	

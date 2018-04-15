@@ -32,6 +32,7 @@ public class Charla {
 	public Date getFecha() {  return fecha;  }
 	public void setDuracion(int duracion) {  this.duracion=duracion;  }
 	public int getDuracion() {  return duracion;  }
+
 	
 	
 /*

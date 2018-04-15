@@ -28,12 +28,23 @@ public class Sala {
 	public int getCapacTotal() { return capacTotal; }
 	public void setActualCapac(int capacidad) { this.actualCapac=capacidad; }
 	public int getActualCapac() { return actualCapac; }
+
 	
 	public void agregarAsiento(Asiento asiento) {//se agrega un asiento al mapa de asientos
 		asientos.agregarAsiento(asiento);
 	}
+	public boolean recorrerAsientos(Asiento asiento) {//para corroborar si el asiento existe
+		if(asientos.verificarAsiento(asiento))return true;
+		return false;
+	}
 	
+	public boolean recorrerAsientos(String idAsiento) {
+		if(asientos.verificarAsiento(idAsiento))return true;
+		return false;
+	}
 	
-	
+	public boolean verificarEstadoAsiento(String idAsiento) {
+		return asientos.estadoAsiento(idAsiento);
+	}
 	
 }

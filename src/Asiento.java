@@ -11,6 +11,7 @@ public class Asiento {
 	
 	public Asiento(String idAsiento) {
 		this.idAsiento=idAsiento;
+		this.ocupado=false;
 	}
 	
 	public Asiento(String idAsiento,boolean ocupado) {

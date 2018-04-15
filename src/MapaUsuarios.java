@@ -10,9 +10,7 @@ public class MapaUsuarios {
 		String key=usuario.getClave();
 		usuarios.put(key, usuario);
 	}
-	public void agregarUsuario() {
-		
-	}
+	
 	public void modificarClaveUsuario(String clave, String nuevaClave) {
 		Usuario persona = usuarios.get(clave);
 		persona.setClave(nuevaClave);
@@ -22,6 +20,13 @@ public class MapaUsuarios {
 		if(!usuarios.containsValue(usuario))return;//si no encuentra el valor, finaliza ya que el usuario no está ingresado
 		String key=usuario.getClave();
 		usuarios.remove(key);
+	}
+	public boolean containsValue(Usuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
+		if(usuarios.containsValue(usuario))return true;
+		return false;
+	}
+	public Usuario obtenerUsuario(String idAsiento) {
+		return usuarios.get(idAsiento);
 	}
 	
 	

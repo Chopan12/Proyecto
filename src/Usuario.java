@@ -2,25 +2,21 @@ import java.util.ArrayList;
 public class Usuario extends Persona {
 	private String clave;
 	private ArrayList<Asiento> asientosAsociados; //charlas a las cuales el usuario asistirá
-	//alen: comprobar que el asiento en la charla en especifico existe, y luego mandar a agregar a este metodo
+	//hay que comprobar que el asiento en la charla en especifico existe, y luego mandar a agregar a este metodo
 	public Usuario() {
 		super();
 		this.clave=null;
 		this.asientosAsociados= new ArrayList<Asiento>();
 	}
-	public Usuario(String clave, String rut, String nombre) {
-		super(nombre,rut);
-		this.clave=clave;
-	}
-	
-	public Usuario(String nombre, String rut, String clave, Asiento asiento) {
+	public void setClave(String clave) { this.clave = clave;}
+	public String getClave() { return clave; }
+
+	public Usuario(String nombre, String rut, String clave) {
 		super(nombre, rut);
 		this.clave=clave;
-		asientosAsociados.add(asiento);
-		
-		
+		this.asientosAsociados=new ArrayList<Asiento>();
 	}
-	
+
 	
 	public boolean recorrerAsientos(String idAsiento) {//para recorrer los asientos y verificar si, por id, ya se encuentra en sus asientos asociados
 		if(asientosAsociados.size()==0)return false;//no tiene nada dentro
@@ -34,17 +30,18 @@ public class Usuario extends Persona {
 		return false;
 	}
 	public void agregarAsiento(Asiento asiento) {
-		if(!recorrerAsientos(asiento.getIdAsiento())) {
+		String id=asiento.getIdAsiento();
+		//if(asientosAsociados.size()==1)return;//solo existe un elemento, por lo que la verificacion es innecesaria
+		if(!recorrerAsientos(id)) {
 			asientosAsociados.add(asiento);
 		}
 	}
 	
-	public void setClave(String clave) { this.clave = clave;}
-	public String getClave() { return clave; }
+
 		
 	public boolean validarRut (Usuario usuario) {
 		String rut = usuario.getRut();
-		rut.trim(); //lo que hace .trim() es eliminar los espacios antes y después del numero o lo que sea que entre
+		rut.trim(); //lo que hace trim() es eliminar los espacios antes y después del numero o lo que sea que entre
 		rut = rut.replace(".", "");
 		rut = rut.replace("-", "");
 		try {
@@ -62,6 +59,16 @@ public class Usuario extends Persona {
 		}
 		
 		return true;
+	}
+	public Asiento getAsiento(String idAsiento) { //para obtener el asiento (que es único por id) el cual se está buscando por id
+		Asiento asiento;
+		String key;
+		for(int i=0; i<asientosAsociados.size(); i++) {
+			asiento=asientosAsociados.get(i);
+			key=asiento.getIdAsiento();
+			if(key.equals(idAsiento))return asiento;
+		}
+		return null;
 	}
 }
 

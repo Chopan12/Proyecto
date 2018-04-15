@@ -3,12 +3,28 @@ import java.util.Date;
 public class ListaCharlas {
 	private ArrayList<Charla> listaCharlas= new ArrayList<Charla>();
 	
-	public Charla obtenerCharla(int i) {
+	public Charla obtenerCharla(Charla charla) {
 		for(int j=0; j<listaCharlas.size(); j++) {
-			if(i==j)return listaCharlas.get(j); //se recorre la lista hasta obtener el mismo numero que ingresa, ya que se busca el objeto en el indice "i"
+			if(listaCharlas.get(j).equals(charla))return listaCharlas.get(j); //se recorre la lista hasta obtener la charla buscada
+		}
+		return null;		
+	}
+ 
+	public Charla obtenerCharla(String idAsiento) {
+		Charla charla;
+		for(int i=0; i<listaCharlas.size(); i++) {
+			charla=listaCharlas.get(i);
+			if(charla.getSalaAsignada().recorrerAsientos(idAsiento))return charla;//verificará si la charla contiene el id en sus asientos
 		}
 		return null;
-		
+	}
+	public boolean recorrerCharlasAsientos(String idAsiento) {//se utilizará para encontrar si el asiento (según su id) está en el mapa de asientos
+		Charla charla;
+		for(int i=0; i<listaCharlas.size(); i++) {
+			charla=listaCharlas.get(i);
+			if(charla.getSalaAsignada().recorrerAsientos(idAsiento))return true; //encontró el asiento
+		}
+		return false;
 	}
 	
 	public boolean recorrerCharlas(String idCharla) { //para corroborar que existe la charla
@@ -148,6 +164,8 @@ public class ListaCharlas {
 		//Importar desde un archivo 	
 		
 	}
+
+
 	
 /*	public int tamañoLista() {  
 		return listaCharlas.size();  

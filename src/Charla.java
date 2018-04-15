@@ -86,7 +86,7 @@ public class Charla {
 		}
 	}
 	*/
-		public void importar (MapaUsuarios usuarios) throws ParseException { //El throws es para verificar que el date se ingrese bien, ademas la funcion asi lo requiere
+		public void importar () throws ParseException { //El throws es para verificar que el date se ingrese bien, ademas la funcion asi lo requiere
 			 
 			String expalabra1,expalabra2,expalabra3; //Strings para rellenar expositores
 			String sapalabra1,sapalabra2,sapalabra3; //Strings para rellenar salas

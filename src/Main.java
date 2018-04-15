@@ -1,12 +1,13 @@
+import java.text.ParseException;
 import java.util.Date;
 public class Main {
 	
-	public static void main (String[] args) {
+	public static void main (String[] args) throws ParseException {
 
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal ();
 		ventanaPrincipal.setVisible(true);
 		
-		Usuario usuario=new Usuario("Francisco", "197292210", "perdi");
+		/*Usuario usuario=new Usuario("Francisco", "197292210", "perdi");
 		Expositor expositor=new Expositor("Alen", "199031066", "Economía");
 		Sala sala=new Sala("70%", 100);
 		String fecha="01/22/2018";
@@ -22,13 +23,9 @@ public class Main {
 		congreso.agregarSala(sala);
 		//congreso.agregarAsientoASala(sala, asiento);
 		
-		congreso.mostrarDatosCharlaUsuario("A1"); //el valor antes puesto es "A1"
-		
-		
-		
-		
-	
-	
+		congreso.mostrarDatosCharlaUsuario("A1"); //el valor antes puesto es "A1"*/
+		Charla ch = new Charla ();
+		ch.importar();
 	}
 	
 	

@@ -172,18 +172,17 @@ public class VentanaCrearCharla extends JFrame {
 
 		
 		String idCharla,strDuracion,fecha,nombre,rut,tema,idSala;
-		//int duracion;
+		int duracion;
 		
 		idCharla =  txtIdCharla.getText();
-		//strDuracion = txtDur.getText();
+		strDuracion = txtDur.getText();
 		fecha = txtFecha.getText();
 		nombre = txtNombreEx.getText();
 		rut = txtRutEx.getText();
 		tema = txtTemaEx.getText();
 		idSala = txtIdSala.getText();
 		
-		//aux = strDuracion;
-		//duracion = Integer.parseInt(aux);
+		duracion = Integer.parseInt(strDuracion);
 		
 		Expositor ex = new Expositor ();
 		ex.setNombre(nombre);
@@ -192,20 +191,27 @@ public class VentanaCrearCharla extends JFrame {
 		
 		Sala sa = new Sala ();
 		sa.setIdSala(idSala);
+		int cAct = sa.getActualCapac();
+		int cTot = sa.getCapacTotal();
+		String stAcCa = Integer.toString(cAct);
+		String stToCa = Integer.toString(cTot);
+		String [] partes = fecha.split("/");
+		String mes = partes[0];
+		String dia = partes[1];
+		String año = partes[3];
 		
 		
 		Charla charlita = new Charla ();
     	charlita.setIdCharla(idCharla);
-    	charlita.setDuracion(0); //El integer.parseint falla 
+    	charlita.setDuracion(duracion); 
     	charlita.setExpositor(ex);
     	charlita.setSalaAsignada(sa);
     	charlita.setFecha(fecha);  
     	
     	ListaCharlas charlas = new ListaCharlas(); 
 		charlas.agregarCharla(charlita);  //Se agrega la charla creada en la lista
-		
-		 
-		
+		AgregarenArchivo agEnAr = new AgregarenArchivo ();
+		agEnAr.importar(idCharla,strDuracion,mes,dia,año,nombre,rut,tema,idSala,stAcCa,stToCa); //Se añade al archivo la charla
 	}
 }
 

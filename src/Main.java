@@ -1,4 +1,3 @@
-import ventana.VentanaPrincipal;
 import java.util.Date;
 public class Main {
 	
@@ -6,12 +5,12 @@ public class Main {
 
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal ();
 		ventanaPrincipal.setVisible(true);
-		Congreso congreso= new Congreso();
+		/*Congreso congreso= new Congreso();
 		Usuario usuario=new Usuario("Francisco", "197292210", "perdi");
 		Expositor expositor=new Expositor("Alen", "199031066", "Economía");
 		Sala sala=new Sala("70%", 100);
 		@SuppressWarnings("deprecation")
-		Date fecha=new Date(1973, 2, 31, 69, 70, 35);
+		String fecha="01/22/2018";
 		Asiento asiento = new Asiento("A1", true);
 		//System.out.println("Pasa por acá\n\n");
 		usuario.agregarAsiento(asiento);
@@ -22,6 +21,7 @@ public class Main {
 		//congreso.agregarAsientoASala(sala, asiento);
 		congreso.agregarUsuario(usuario);
 		congreso.mostrarDatosCharlaUsuario("A1"); //el valor antes puesto es "A1"
+		*/
 		
 		
 		

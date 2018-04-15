@@ -58,7 +58,7 @@ public class ListaCharlas {
 	}
 	
 	
-	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, Date fecha){ // Agrega una charla a la lista de charlas
+	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha){ // Agrega una charla a la lista de charlas
 		if(idCharla.equals(" "))return;
 		if(expositor.equals(null))return;
 		if(sala.equals(null))return;
@@ -73,7 +73,7 @@ public class ListaCharlas {
 		listaCharlas.add(charla);
 	}
 	
-	public void modificarCharla(String idCharla,int duracion, Sala sala, Date fecha){ // modifica un evento en la lista eventos utilizando su id.
+	public void modificarCharla(String idCharla,int duracion, Sala sala, String fecha){ // modifica un evento en la lista eventos utilizando su id.
 		if(idCharla.equals(""))return;
 		if(fecha.equals(null))return;
 		if(sala.equals(null))return;
@@ -104,12 +104,12 @@ public class ListaCharlas {
 		}
 	}
 	
-	public void modificarCharla(String idCharla, Date fecha) {
+	public void modificarCharla(String idCharla, String fecha) {
 		if(fecha.equals(null))return;//si no se ingresa una fecha válida
 		if(recorrerCharlas(idCharla)) {
 			Charla charla=listaCharlas.get(indexArray(idCharla));//se obtiene la charla que se debe modificar
-			Date fechaAux=charla.getFecha();//se almacena la fecha para comparar si la fecha ingresada es menor a la actual
-			if(fechaAux.after(fecha))return;//Consideraremos que no se puede adelantar una charla, solo atrasarla
+			String fechaAux=charla.getFecha();//se almacena la fecha para comparar si la fecha ingresada es menor a la actual
+			//if(fechaAux.after(fecha))return;//Consideraremos que no se puede adelantar una charla, solo atrasarla (Problemas por date)*Cambiar despues*
 			//if(fecha.before(fechaAux))return;//es lo mismo que arriba, solo que se ve de otra forma
 			if(recorrerCharlas(idCharla)) {
 				if(indexArray(idCharla)!=-1)listaCharlas.get(indexArray(idCharla)).setFecha(fecha); //se cambia la fecha a una posterior

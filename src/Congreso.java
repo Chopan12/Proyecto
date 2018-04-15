@@ -15,7 +15,7 @@ public class Congreso {
 			charlas.agregarCharla(charla);
 		}
 	}
-	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, Date fecha) {
+	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha) {
 		charlas.agregarCharla(idCharla,duracion, expositor, sala, fecha);
 	}
 	

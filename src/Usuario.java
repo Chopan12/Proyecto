@@ -10,6 +10,11 @@ public class Usuario extends Persona {
 	}
 	public void setClave(String clave) { this.clave = clave;}
 	public String getClave() { return clave; }
+	
+	public String getNombre() {
+		String nombre=this.getNombre();
+		return nombre;
+	}
 
 	public Usuario(String nombre, String rut, String clave) {
 		super(nombre, rut);

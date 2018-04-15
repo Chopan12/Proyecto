@@ -25,7 +25,6 @@ public class MapaSalas {
 		String id=sala.getIdSala();
 		aux=mapaSalas.get(id);
 		mapaSalas.remove(id);
-		
 		aux.agregarAsiento(asiento);
 		mapaSalas.put(id, aux);
 	}

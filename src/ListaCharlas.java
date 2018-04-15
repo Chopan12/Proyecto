@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Date;
 public class ListaCharlas {
-	private ArrayList<Charla> listaCharlas= new ArrayList<Charla>();
+	private ArrayList<Charla> listaCharlas;
 	
+	public ListaCharlas() {
+		listaCharlas = new ArrayList<Charla>();
+	}
 	public Charla obtenerCharla(Charla charla) {
 		for(int j=0; j<listaCharlas.size(); j++) {
 			if(listaCharlas.get(j).equals(charla))return listaCharlas.get(j); //se recorre la lista hasta obtener la charla buscada
@@ -17,7 +20,6 @@ public class ListaCharlas {
 			charla=listaCharlas.get(i);
 			salaAsignada=charla.getSalaAsignada();
 
-			//muerte#1
 			if(salaAsignada.recorrerAsientos(idAsiento))
 			return charla;//verificará si la charla contiene el id en sus asientos
 		}
@@ -32,13 +34,21 @@ public class ListaCharlas {
 		return false;
 	}
 	
-	public boolean recorrerCharlas(String idCharla) { //para corroborar que existe la charla
+	public boolean recorrerCharlas(String idAsiento) { //para corroborar que existe la charla
 		Charla charla;
 		String id;
 		for(int i=0; i<listaCharlas.size();i++) {
+			
 			charla=listaCharlas.get(i);
-			id=charla.getIdCharla();
-			if(id.equals(idCharla))return true; //fue encontrada, así que es verdadero
+			Sala sala= charla.getSalaAsignada(); //se obtiene la sala asignada que tiene la charla
+			Asiento asiento= sala.obtenerAsiento(idAsiento); //se obtiene el asiento que se está buscando con su id
+			id=asiento.getIdAsiento(); //obtenemos el id que tiene el asiento y confirmamos si es el mismo que está entrando
+			if(sala.recorrerAsientos(idAsiento)) {
+				if(id.equals(idAsiento)) {
+					return true; //fue encontrada, así que es verdadero
+				}
+			}
+			
 		}
 		return false;//no se encontró
 	}
@@ -104,11 +114,11 @@ public class ListaCharlas {
 		}
 	}
 	
-	public void modificarCharla(String idCharla, String fecha) {
+	/*public void modificarCharla(String idCharla, String fecha) {
 		if(fecha.equals(null))return;//si no se ingresa una fecha válida
 		if(recorrerCharlas(idCharla)) {
 			Charla charla=listaCharlas.get(indexArray(idCharla));//se obtiene la charla que se debe modificar
-			String fechaAux=charla.getFecha();//se almacena la fecha para comparar si la fecha ingresada es menor a la actual
+			//String fechaAux=charla.getFecha();//se almacena la fecha para comparar si la fecha ingresada es menor a la actual
 			//if(fechaAux.after(fecha))return;//Consideraremos que no se puede adelantar una charla, solo atrasarla (Problemas por date)*Cambiar despues*
 			//if(fecha.before(fechaAux))return;//es lo mismo que arriba, solo que se ve de otra forma
 			if(recorrerCharlas(idCharla)) {
@@ -116,6 +126,7 @@ public class ListaCharlas {
 			}
 		}
 	}
+	*/
 	public Charla buscarCharla(String idCharla){ // Busca charla en la lista usando su idCharla
 		if(listaCharlas.size()==0)return null;
 		
@@ -168,6 +179,10 @@ public class ListaCharlas {
 	public void importar(ArrayList<Charla> charlas) {
 		//Importar desde un archivo 	
 		
+	}
+
+	public int size() {
+		return listaCharlas.size();
 	}
 
 

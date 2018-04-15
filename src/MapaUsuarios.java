@@ -1,7 +1,8 @@
 import java.util.Hashtable;
 
 public class MapaUsuarios {
-	private Hashtable<String, Usuario> usuarios = new Hashtable<String, Usuario>();
+	private Hashtable<String, Usuario> usuarios;
+	
 	public MapaUsuarios() {
 		usuarios=new Hashtable<String, Usuario>();
 	}

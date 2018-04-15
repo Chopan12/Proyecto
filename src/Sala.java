@@ -19,6 +19,7 @@ public class Sala {
 		this.idSala=idSala;
 		this.capacTotal=capacTotal;
 		this.actualCapac=0;
+		this.asientos=new MapaAsientos();
 	}
 	
 	
@@ -39,10 +40,14 @@ public class Sala {
 	}
 	
 	public boolean recorrerAsientos(String idAsiento) {
-		boolean valor;
-		valor=asientos.verificarAsiento(idAsiento);
-		return valor;
+		return asientos.estadoAsiento(idAsiento);
 	
+	}
+	
+	public Asiento obtenerAsiento(String idAsiento) {//para obtener el asiento que está adentro con su id
+		return asientos.obtenerAsiento(idAsiento);
+		
+		
 	}
 	
 	public boolean verificarEstadoAsiento(String idAsiento) {

@@ -18,6 +18,7 @@ public class MapaAsientos {
 	}
 	
 	public boolean verificarAsiento(String idAsiento) {
+
 		if(mapaAsientos.containsKey(idAsiento))return true;
 		return false;
 	}
@@ -30,12 +31,22 @@ public class MapaAsientos {
 		Asiento asiento;
 		String id;
 		for(int i=0; i<listaAsientos.size(); i++) {
-			asiento=listaAsientos.get(i);
+			asiento=(Asiento)listaAsientos.get(i);
 			id=asiento.getIdAsiento();
-			if(id.equals(idAsiento))return asiento.getEstadoAsiento();//se comprobará el estado del asiento y lo retornará
+			if(id.equals(idAsiento)) {
+				return asiento.getEstadoAsiento();//se comprobará el estado del asiento y lo retornará
+			}
 			
 		}
 		return false;//en cualquier otro caso, se retorna false
+	}
+
+	public Asiento obtenerAsiento(String idAsiento) {
+		if(mapaAsientos.containsKey(idAsiento)) {
+			return mapaAsientos.get(idAsiento);
+		}
+		
+		return null;
 	}
 	
 	

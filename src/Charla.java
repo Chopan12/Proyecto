@@ -7,9 +7,9 @@ public class Charla {
 	private Sala salaAsignada; //para poder ver a que sala está asignada la charla
 	public Charla() {
 		this.idCharla=null;
-		this.fecha=null;
-		this.expositor=null;
-		this.salaAsignada=null;
+		this.fecha=new Date();
+		this.expositor=new Expositor();
+		this.salaAsignada=new Sala();
 		this.duracion=0;
 	}
 	

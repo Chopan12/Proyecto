@@ -15,4 +15,18 @@ public class MapaSalas {
 		if(!mapaSalas.containsKey(idSala))mapaSalas.put(idSala, sala);
 	}
 	
+	public boolean encontrarSala(Sala sala) {
+		if(mapaSalas.containsValue(sala))return true;
+		return false;
+	}
+
+	public void añadirAsiento(Sala sala, Asiento asiento) {
+		Sala aux=new Sala();
+		String id=sala.getIdSala();
+		aux=mapaSalas.get(id);
+		mapaSalas.remove(id);
+		
+		aux.agregarAsiento(asiento);
+		mapaSalas.put(id, aux);
+	}
 }

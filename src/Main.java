@@ -17,7 +17,9 @@ public class Main {
 		usuario.agregarAsiento(asiento);
 		Charla charla = new Charla("70 o/o", 70, expositor, sala, fecha);
 		congreso.agregarCharla(charla);
+		congreso.agregarAsientoASala(sala, asiento);
 		congreso.agregarSala(sala);
+		//congreso.agregarAsientoASala(sala, asiento);
 		congreso.agregarUsuario(usuario);
 		congreso.mostrarDatosCharlaUsuario("A1"); //el valor antes puesto es "A1"
 		

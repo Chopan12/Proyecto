@@ -39,8 +39,10 @@ public class Sala {
 	}
 	
 	public boolean recorrerAsientos(String idAsiento) {
-		if(asientos.verificarAsiento(idAsiento))return true;
-		return false;
+		boolean valor;
+		valor=asientos.verificarAsiento(idAsiento);
+		return valor;
+	
 	}
 	
 	public boolean verificarEstadoAsiento(String idAsiento) {

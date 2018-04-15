@@ -18,11 +18,7 @@ public class MapaAsientos {
 	}
 	
 	public boolean verificarAsiento(String idAsiento) {
-		Asiento asiento;
-		for(int i = 0; i<listaAsientos.size(); i++) {
-			asiento=listaAsientos.get(i);
-			if(asiento.getIdAsiento().equals(idAsiento))return true;
-		}
+		if(mapaAsientos.containsKey(idAsiento))return true;
 		return false;
 	}
 	public boolean verificarAsiento(Asiento asiento) {

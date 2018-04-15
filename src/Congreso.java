@@ -30,8 +30,13 @@ public class Congreso {
 	public void agregarSala(Sala sala) {
 		salas.añadirSala(sala);
 	}
-	
+	public void agregarAsientoASala(Sala sala, Asiento asiento) {
+		if(salas.encontrarSala(sala)){
+			salas.añadirAsiento(sala, asiento);
+		}
+	}
 	public void mostrarDatosCharlaUsuario(String idAsiento) {
+		
 		Usuario persona;
 		Charla charla;
 		persona=usuarios.obtenerUsuario(idAsiento);

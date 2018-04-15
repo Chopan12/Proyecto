@@ -12,9 +12,14 @@ public class ListaCharlas {
  
 	public Charla obtenerCharla(String idAsiento) {
 		Charla charla;
+		Sala salaAsignada;
 		for(int i=0; i<listaCharlas.size(); i++) {
 			charla=listaCharlas.get(i);
-			if(charla.getSalaAsignada().recorrerAsientos(idAsiento))return charla;//verificará si la charla contiene el id en sus asientos
+			salaAsignada=charla.getSalaAsignada();
+
+			//muerte#1
+			if(salaAsignada.recorrerAsientos(idAsiento))
+			return charla;//verificará si la charla contiene el id en sus asientos
 		}
 		return null;
 	}

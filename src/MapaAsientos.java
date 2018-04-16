@@ -1,4 +1,9 @@
 import java.util.Hashtable;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 public class MapaAsientos {
 	private Hashtable<String, Asiento> mapaAsientos;
@@ -8,6 +13,11 @@ public class MapaAsientos {
 		mapaAsientos=new Hashtable<String, Asiento>();
 		listaAsientos=new ArrayList<Asiento>(mapaAsientos.values());
 	}
+	
+	public MapaAsientos(Hashtable<String, Asiento> mapilla) {
+        mapaAsientos = mapilla;
+        listaAsientos=new ArrayList<Asiento>(mapaAsientos.values());
+    }
 	
 	public void agregarAsiento(Asiento asiento) { //hay que verificar que el asiento no se encuentra ya en el usuario, a futuro agregar opcion para meterlo también al arraylist
 		String key=asiento.getIdAsiento();
@@ -49,7 +59,48 @@ public class MapaAsientos {
 		return null;
 	}
 	
+	public MapaAsientos obtenerAsientos(String idSala){
+        ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>(mapaAsientos.values());
+        Hashtable<String, Asiento> mapa=new Hashtable<String, Asiento>();
+        for(Asiento i : listaAsientos) {
+            if(i.getIdSala().equals(idSala))
+                mapa.put(i.getIdAsiento(), i);
+
+        }
+
+        return new MapaAsientos(mapa);
+    }
+	
+	public void importar () throws ParseException, IOException  { //Funcion para importar asiento
+		String linea;
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/asientos.txt"));
+			while ((linea = br.readLine()) != null) {
+				String[] palabras = new String [3];
+				palabras = linea.split(";"); 
+				
+				Asiento as = new Asiento ();
+				as.setIdAsiento(palabras[0]);
+				if (palabras[1].equals("false")) { 
+				as.setAsientoLibre();
+				}else {
+					as.setAsientoOcupado();
+				}
+				as.setIdSala(palabras[2]);
+				agregarAsiento(as); //Se agrega al mapa el asiento creado 
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		}
+		
+	}
+	
 	
 
 	
-}
+

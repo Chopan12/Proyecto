@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Hashtable;
 public class MapaSalas {
 	private Hashtable<String, Sala> mapaSalas;
@@ -28,4 +33,34 @@ public class MapaSalas {
 		aux.agregarAsiento(asiento);
 		mapaSalas.put(id, aux);
 	}
-}
+	
+	public Sala encontrarSala (String id) { //Encontrara sala atraves del id y la retornara
+		return mapaSalas.get(id);
+		
+	}
+
+	public void importar (MapaAsientos mapAs) throws ParseException, IOException {
+		String linea;
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/salas.txt"));
+			while ((linea = br.readLine()) != null) {
+				String[] palabras = new String [3];
+				palabras = linea.split(";"); 
+				
+				Sala sala = new Sala();
+				sala.setIdSala(palabras[0]);
+				sala.setActualCapac(Integer.parseInt(palabras[1]));
+				sala.setCapacTotal(Integer.parseInt(palabras[2]));
+				sala.setAsientos(mapAs.obtenerAsientos(sala.getIdSala()));
+				añadirSala(sala);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+		}
+	}
+

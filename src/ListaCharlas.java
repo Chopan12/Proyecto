@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 public class ListaCharlas {
@@ -176,9 +180,30 @@ public class ListaCharlas {
 	
 	}
 	
-	public void importar(ArrayList<Charla> charlas) {
-		//Importar desde un archivo 	
+	public void importar(MapaSalas MapSa) throws IOException {
+		BufferedReader br;
+		String linea;
+		try {
+			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/asientos.txt"));
+			while ((linea = br.readLine()) != null) {
+				String[] palabras = new String [9];
+				palabras = linea.split(";");  
+				Charla ch = new Charla ();
+				ch.setIdCharla(palabras[0]);
+				ch.setDuracion(Integer.parseInt(palabras[1]));
+				String fecha = palabras[2]+"/"+palabras[3]+"/"+palabras[4]; 
+				ch.setFecha(fecha);
+				
+			
+				Expositor ex = new Expositor (palabras[5],palabras[6],palabras[7]);
+				ch.setExpositor(ex);
+				ch.setSalaAsignada(MapSa.encontrarSala(palabras[8]));
+				agregarCharla(ch);
+			}
 		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+	}
 	}
 
 	public int size() {

@@ -1,15 +1,20 @@
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 public class Congreso {
 	private ListaCharlas charlas;
 	private MapaUsuarios usuarios;
 	private MapaSalas salas;
+	private MapaAsientos asientos;
 	
 	public Congreso() {
 		this.charlas=new ListaCharlas();
 		this.usuarios=new MapaUsuarios();
 		this.salas=new MapaSalas();
+		this.asientos=new MapaAsientos();
 	}
+	
 	public void agregarCharla(Charla charla) {
 		if(charlas.size()==0) {
 			charlas.agregarCharla(charla);
@@ -39,7 +44,8 @@ public class Congreso {
 			salas.añadirAsiento(sala, asiento);
 		}
 	}
-	public void mostrarDatosCharlaUsuario(String idAsiento) {
+	
+	/*public void mostrarDatosCharlaUsuario(String idAsiento) {
 		
 		Usuario persona = new Usuario();
 		Charla charla = new Charla();
@@ -74,6 +80,13 @@ public class Congreso {
 				}
 		System.out.println("No compila\n\n");
 		}
+	}*/
+	
+	public void importar () throws ParseException, IOException {
+		asientos.importar();
+		salas.importar(asientos);
+		charlas.importar(salas);
+		
 	}
 	
 	

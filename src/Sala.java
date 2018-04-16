@@ -54,4 +54,13 @@ public class Sala {
 		return asientos.estadoAsiento(idAsiento);
 	}
 	
+	public void agregarAsientos (MapaAsientos mapAs) {
+		
+	}
+	public void setAsientos(MapaAsientos obtenerAsientos) {
+		asientos=obtenerAsientos;
+	}
+	
+	
+	
 }

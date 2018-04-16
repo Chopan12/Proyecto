@@ -210,7 +210,7 @@ public class VentanaCrearCharla extends JFrame {
     	
     	ListaCharlas charlas = new ListaCharlas(); 
 		charlas.agregarCharla(charlita);  //Se agrega la charla creada en la lista
-		AgregarenArchivo agEnAr = new AgregarenArchivo ();
+		//AgregarenArchivo agEnAr = new AgregarenArchivo ();
 		agEnAr.importar(idCharla,strDuracion,mes,dia,año,nombre,rut,tema,idSala,stAcCa,stToCa); //Se añade al archivo la charla
 	}
 }

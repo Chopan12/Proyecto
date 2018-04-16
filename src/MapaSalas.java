@@ -43,7 +43,7 @@ public class MapaSalas {
 		String linea;
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/salas.txt"));
+			br = new BufferedReader(new FileReader("salas.txt"));
 			while ((linea = br.readLine()) != null) {
 				String[] palabras = new String [3];
 				palabras = linea.split(";"); 

@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
 public class Charla {
 	private String idCharla;
 	private int duracion;//duracion de la charla en minutos

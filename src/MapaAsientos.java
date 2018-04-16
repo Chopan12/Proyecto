@@ -75,19 +75,19 @@ public class MapaAsientos {
 		String linea;
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/asientos.txt"));
+			br = new BufferedReader(new FileReader("asientos.txt"));
 			while ((linea = br.readLine()) != null) {
 				String[] palabras = new String [3];
 				palabras = linea.split(";"); 
 				
 				Asiento as = new Asiento ();
 				as.setIdAsiento(palabras[0]);
-				if (palabras[1].equals("false")) { 
+				if (palabras[2].equals("false")) { 
 				as.setAsientoLibre();
 				}else {
 					as.setAsientoOcupado();
 				}
-				as.setIdSala(palabras[2]);
+				as.setIdSala(palabras[1]);
 				agregarAsiento(as); //Se agrega al mapa el asiento creado 
 			}
 		} catch (FileNotFoundException e) {

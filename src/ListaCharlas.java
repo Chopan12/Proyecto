@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 public class ListaCharlas {
 	private ArrayList<Charla> listaCharlas;
 	
@@ -184,7 +183,7 @@ public class ListaCharlas {
 		BufferedReader br;
 		String linea;
 		try {
-			br = new BufferedReader(new FileReader("C:/Users/nicho/Desktop/asientos.txt"));
+			br = new BufferedReader(new FileReader("asientos.txt"));
 			while ((linea = br.readLine()) != null) {
 				String[] palabras = new String [9];
 				palabras = linea.split(";");  

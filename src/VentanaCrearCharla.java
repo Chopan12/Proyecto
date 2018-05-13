@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class VentanaCrearCharla extends JFrame {
 
@@ -168,6 +170,11 @@ public class VentanaCrearCharla extends JFrame {
 		lblNewLabel_10.setBounds(240, 136, 86, 14);
 		contentPane.add(lblNewLabel_10);
 		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Asientos 50", "Asientos 60", "Asientos 70"}));
+		comboBox.setBounds(391, 129, 130, 20);
+		contentPane.add(comboBox);
+		
 		
 
 		
@@ -181,8 +188,14 @@ public class VentanaCrearCharla extends JFrame {
 		rut = txtRutEx.getText();
 		tema = txtTemaEx.getText();
 		idSala = txtIdSala.getText();
+		Charla charlita = new Charla ();
 		
-		duracion = Integer.parseInt(strDuracion);
+		Miscelaneo mi = new Miscelaneo ();
+		
+		if (mi.esNumerico(strDuracion)) { //Se comprueba si fue numerico el numero ingresado en
+		duracion = Integer.parseInt(strDuracion); //Se obtiene la duracion desde el 
+		charlita.setDuracion(duracion); 
+		}
 		
 		Expositor ex = new Expositor ();
 		ex.setNombre(nombre);
@@ -191,27 +204,18 @@ public class VentanaCrearCharla extends JFrame {
 		
 		Sala sa = new Sala ();
 		sa.setIdSala(idSala);
-		int cAct = sa.getActualCapac();
-		int cTot = sa.getCapacTotal();
-		String stAcCa = Integer.toString(cAct);
-		String stToCa = Integer.toString(cTot);
-		String [] partes = fecha.split("/");
-		String mes = partes[0];
-		String dia = partes[1];
-		String año = partes[3];
+
 		
 		
-		Charla charlita = new Charla ();
     	charlita.setIdCharla(idCharla);
-    	charlita.setDuracion(duracion); 
     	charlita.setExpositor(ex);
     	charlita.setSalaAsignada(sa);
     	charlita.setFecha(fecha);  
     	
-    	ListaCharlas charlas = new ListaCharlas(); 
+    	Congreso c = new Congreso ();
+    	ListaCharlas charlas = c.obtenerL(); 
 		charlas.agregarCharla(charlita);  //Se agrega la charla creada en la lista
-		//AgregarenArchivo agEnAr = new AgregarenArchivo ();
-		agEnAr.importar(idCharla,strDuracion,mes,dia,año,nombre,rut,tema,idSala,stAcCa,stToCa); //Se añade al archivo la charla
+		
 	}
 }
 

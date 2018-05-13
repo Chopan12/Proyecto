@@ -22,7 +22,7 @@ public class MapaUsuarios {
 		String key=usuario.getClave();
 		usuarios.remove(key);
 	}
-	public boolean containsValue(Usuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
+	public boolean existeUsuario(Usuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
 		if(usuarios.containsValue(usuario))return true;
 		return false;
 	}

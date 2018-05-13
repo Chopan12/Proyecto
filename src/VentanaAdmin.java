@@ -15,11 +15,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 public class VentanaAdmin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 
 	/**
 	 * Launch the application.
@@ -58,7 +59,8 @@ public class VentanaAdmin extends JFrame {
 		JButton btnNewButton = new JButton("Volver\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipal ventanaPrincipal2 = new VentanaPrincipal ();
+				Congreso c = new Congreso ();
+				VentanaPrincipal ventanaPrincipal2 = new VentanaPrincipal (c);
 				setVisible(false);
 				ventanaPrincipal2.setVisible(true);
 				
@@ -85,7 +87,7 @@ public class VentanaAdmin extends JFrame {
 		textField.setBounds(145, 86, 144, 20);
 		contentPane.add(textField);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(145, 141, 144, 20);
 		contentPane.add(textField_1);

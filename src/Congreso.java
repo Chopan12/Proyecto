@@ -15,7 +15,7 @@ public class Congreso {
 	}
 	
 	public void agregarCharla(Charla charla) {
-		if(charlas.size()==0) {
+		if(charlas.tamanio()==0) {
 			charlas.agregarCharla(charla);
 			return;
 		}
@@ -44,7 +44,22 @@ public class Congreso {
 		}
 	}
 	
-	/*public void mostrarDatosCharlaUsuario(String idAsiento) {
+	public ListaCharlas obtenerL () {
+		return charlas;
+	}
+	
+	public MapaUsuarios obtenerMaUs () {
+		return usuarios;
+	}
+	
+	public MapaSalas obtenerMaSa () {
+		return salas;
+	}
+	
+	public MapaAsientos obtenerMaAs () {
+		return asientos;
+	}
+ 	/*public void mostrarDatosCharlaUsuario(String idAsiento) {
 		
 		Usuario persona = new Usuario();
 		Charla charla = new Charla();
@@ -84,13 +99,7 @@ public class Congreso {
 	public void importar () throws ParseException, IOException {
 		asientos.importar();
 		salas.importar(asientos);
-		charlas.importar(salas);
-		
+		charlas.importar(salas);	
 	}
-	
-	
-	
-	
-	
 	
 }

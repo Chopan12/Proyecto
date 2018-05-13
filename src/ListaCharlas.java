@@ -15,8 +15,14 @@ public class ListaCharlas {
 		}
 		return null;		
 	}
+	
+	public Charla obtenerCharla (int i) {
+		Charla charla = listaCharlas.get(i);
+		return charla;
+	}
+
  
-	public Charla obtenerCharla(String idAsiento) {
+	public Charla obtenerCharla(String idAsiento) { //devolverá la Charla utilizando el id
 		Charla charla;
 		Sala salaAsignada;
 		for(int i=0; i<listaCharlas.size(); i++) {
@@ -40,11 +46,13 @@ public class ListaCharlas {
 	public boolean recorrerCharlas(String idAsiento) { //para corroborar que existe la charla
 		Charla charla;
 		String id;
+		
 		for(int i=0; i<listaCharlas.size();i++) {
 			
 			charla=listaCharlas.get(i);
-			Sala sala= charla.getSalaAsignada(); //se obtiene la sala asignada que tiene la charla
+			Sala sala = charla.getSalaAsignada(); //se obtiene la sala asignada que tiene la charla
 			Asiento asiento= sala.obtenerAsiento(idAsiento); //se obtiene el asiento que se está buscando con su id
+			
 			id=asiento.getIdAsiento(); //obtenemos el id que tiene el asiento y confirmamos si es el mismo que está entrando
 			if(sala.recorrerAsientos(idAsiento)) {
 				if(id.equals(idAsiento)) {
@@ -53,6 +61,7 @@ public class ListaCharlas {
 			}
 			
 		}
+		
 		return false;//no se encontró
 	}
 	
@@ -107,8 +116,9 @@ public class ListaCharlas {
 		if(recorrerCharlas(idCharla)) {
 			if(indexArray(idCharla)!=-1)listaCharlas.get(indexArray(idCharla)).setDuracion(duracion);
 		}
-		
 	}
+	
+	
 	
 	public void modificarCharla(String idCharla, Sala sala) { //se utilizará para cambiar la charla de sitio
 		if(sala.equals(null))return;//no existe una sala válida ingresada
@@ -183,21 +193,23 @@ public class ListaCharlas {
 		BufferedReader br;
 		String linea;
 		try {
-			br = new BufferedReader(new FileReader("asientos.txt"));
+			br = new BufferedReader(new FileReader("charlas.txt"));
 			while ((linea = br.readLine()) != null) {
 				String[] palabras = new String [9];
 				palabras = linea.split(";");  
 				Charla ch = new Charla ();
+				
 				ch.setIdCharla(palabras[0]);
+				//System.out.println("ID CHARLA: " + ch.getIdCharla());
 				ch.setDuracion(Integer.parseInt(palabras[1]));
+	
 				String fecha = palabras[2]+"/"+palabras[3]+"/"+palabras[4]; 
 				ch.setFecha(fecha);
-				
-			
 				Expositor ex = new Expositor (palabras[5],palabras[6],palabras[7]);
 				ch.setExpositor(ex);
 				ch.setSalaAsignada(MapSa.encontrarSala(palabras[8]));
-				agregarCharla(ch);
+				//System.out.println("SALA : " + ch.getSalaAsignada().getIdSala());
+				listaCharlas.add(ch);
 			}
 		
 		} catch (FileNotFoundException e) {
@@ -205,7 +217,7 @@ public class ListaCharlas {
 	}
 	}
 
-	public int size() {
+	public int tamanio() {
 		return listaCharlas.size();
 	}
 

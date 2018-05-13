@@ -14,12 +14,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class VentanaUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField ingresarRut;
-	private JTextField ingresarClave;
+	private JPasswordField ingresarClave;
 
 	/**
 	 * Launch the application.
@@ -59,7 +60,8 @@ public class VentanaUsuario extends JFrame {
 		JButton botonVolverUs = new JButton("Volver\r\n");
 		botonVolverUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipal ventanaPrincipal2 = new VentanaPrincipal ();
+				Congreso c = new Congreso ();
+				VentanaPrincipal ventanaPrincipal2 = new VentanaPrincipal (c);
 				setVisible(false);
 				ventanaPrincipal2.setVisible(true);
 			}
@@ -75,11 +77,14 @@ public class VentanaUsuario extends JFrame {
 		contentPane.add(ingresarRut);
 		ingresarRut.setColumns(10);
 		
-		ingresarClave = new JTextField();
+		ingresarClave = new JPasswordField();
 		ingresarClave.setBounds(145, 141, 144, 20);
 		contentPane.add(ingresarClave);
 		ingresarClave.setColumns(10);
 
+		String rut,clave;
+		rut = ingresarRut.getText();
+		clave = ingresarClave.getText();
 		
 		JLabel lblNewLabel = new JLabel("Rut :\r\n\r\n\r\n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -94,6 +99,9 @@ public class VentanaUsuario extends JFrame {
 		JButton btnContinuar_1 = new JButton("Continuar\r\n");
 		btnContinuar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				MapaUsuarios mapUs = new MapaUsuarios ();
+				Usuario usuario = new Usuario ();
+				//if mapUs.existeUsuario(usuario)
 				VentanaUsuario2 ventanaUs2 = new VentanaUsuario2 ();
 				setVisible (false);
 				ventanaUs2.setVisible(true);

@@ -52,20 +52,21 @@ public class MapaAsientos {
 	}
 
 	public Asiento obtenerAsiento(String idAsiento) {
+		System.out.println("llegué acá");
 		if(mapaAsientos.containsKey(idAsiento)) {
+			
 			return mapaAsientos.get(idAsiento);
 		}
 		
 		return null;
 	}
 	
-	public MapaAsientos obtenerAsientos(String idSala){
-        ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>(mapaAsientos.values());
+	public MapaAsientos obtenerAsientos(String idSala){ //SE ROMPIO EL ENCAPSULAMIENTO
+        ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>(mapaAsientos.values()); //Se copian los objetos que contiene el mapaAsientos dentro de un nuevo arrayList para ser utilizado
         Hashtable<String, Asiento> mapa=new Hashtable<String, Asiento>();
         for(Asiento i : listaAsientos) {
             if(i.getIdSala().equals(idSala))
                 mapa.put(i.getIdAsiento(), i);
-
         }
 
         return new MapaAsientos(mapa);

@@ -64,5 +64,28 @@ public class VentanaAdmin2 extends JFrame {
 		label.setFont(new Font("Tahoma", Font.BOLD, 15));
 		label.setBounds(147, 29, 140, 19);
 		contentPane.add(label);
+		
+		JButton btnNewButton = new JButton("Editar Usuario");
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.setBounds(147, 161, 127, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Editar Charla");
+		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_1.setBounds(297, 84, 127, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Mostrar Planilla");
+		btnNewButton_2.setBackground(Color.WHITE);
+		btnNewButton_2.setBounds(147, 209, 127, 23);
+		contentPane.add(btnNewButton_2);
 	}
 }

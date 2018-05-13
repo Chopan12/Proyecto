@@ -26,7 +26,8 @@ public class VentanaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal();
+					Congreso c = new Congreso ();
+					VentanaPrincipal frame = new VentanaPrincipal(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +39,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -59,7 +60,7 @@ public class VentanaPrincipal extends JFrame {
 		btnNewButton_1.setForeground(Color.BLUE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			VentanaUsuario ventanaUs = new VentanaUsuario ();
+			registrarIniciar ventanaUs = new registrarIniciar ();
 			setVisible (false);
 			ventanaUs.setVisible (true);
 			}

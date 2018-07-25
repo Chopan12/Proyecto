@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,21 +11,22 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+public class Registro extends JFrame  {
 
-public class Registro extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField Rut;
 	private JTextField Nombre;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Registro frame = new Registro();
+					Congreso c = new Congreso ();
+					Registro frame = new Registro(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,10 +35,7 @@ public class Registro extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Registro() {
+	public Registro(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -64,13 +61,13 @@ public class Registro extends JFrame {
 		Rut.setColumns(10);
 		Rut.setBounds(145, 110, 144, 20);
 		panel.add(Rut);
-		String rut = Rut.getText(); //Se obtiene el rut
+		
 		
 		JPasswordField Clave = new JPasswordField();
 		Clave.setColumns(10);
 		Clave.setBounds(145, 141, 144, 20);
 		panel.add(Clave);
-		String clave = Clave.getText();
+		
 		
 		JLabel label_1 = new JLabel("Rut :\r\n\r\n\r\n");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -86,26 +83,30 @@ public class Registro extends JFrame {
 		Nombre.setColumns(10);
 		Nombre.setBounds(145, 79, 144, 20);
 		panel.add(Nombre);
-		String nombre = Nombre.getText();
+	
 		
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
-			
+		
 			public void actionPerformed(ActionEvent arg0) {   //Registrar Usuario
+				String nombre = Nombre.getText();
+				@SuppressWarnings("deprecation") //Aqui se saca el warning porque siempre tendra warning un getText de un passwordfield
+				String clave = Clave.getText();
+				String rut = Rut.getText(); //Se obtiene el rut
+				
 				Usuario nuevUs = new Usuario (nombre,rut,clave);
-			
-				MapaUsuarios mapUs = new MapaUsuarios ();
-				mapUs.agregarUsuario(nuevUs);
+				MapaUsuarios m = c.obtenerMaUs(); 
+				m.agregarUsuario(nuevUs);
 				
 				setVisible(false);
-				VentanaUsuario Vu= new VentanaUsuario ();
+				VentanaUsuario Vu= new VentanaUsuario (c);
 				Vu.setVisible(true);
 			}
 		});
 		btnRegistrarse.setForeground(Color.BLACK);
 		btnRegistrarse.setFont(btnRegistrarse.getFont().deriveFont(btnRegistrarse.getFont().getStyle() | Font.BOLD | Font.ITALIC));
 		btnRegistrarse.setBackground(Color.RED);
-		btnRegistrarse.setBounds(154, 213, 117, 23);
+		btnRegistrarse.setBounds(233, 212, 117, 23);
 		panel.add(btnRegistrarse);
 		
 		
@@ -115,5 +116,19 @@ public class Registro extends JFrame {
 		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNombre.setBounds(75, 82, 60, 14);
 		panel.add(lblNombre);
+		
+		JButton button = new JButton("Volver\r\n");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaRegistrarIniciar v1 = new VentanaRegistrarIniciar(c);
+				setVisible(false);
+				v1.setVisible(true);
+			}
+		});
+		button.setForeground(Color.BLACK);
+		button.setFont(button.getFont().deriveFont(button.getFont().getStyle() | Font.BOLD | Font.ITALIC));
+		button.setBackground(Color.MAGENTA);
+		button.setBounds(89, 212, 89, 23);
+		panel.add(button);
 	}
 }

@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,18 +10,17 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class registrarIniciar extends JFrame {
+public class VentanaRegistrarIniciar extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					registrarIniciar frame = new registrarIniciar();
+					Congreso c = new Congreso ();
+					VentanaRegistrarIniciar frame = new VentanaRegistrarIniciar(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +32,7 @@ public class registrarIniciar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public registrarIniciar() {
+	public VentanaRegistrarIniciar(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -46,7 +44,7 @@ public class registrarIniciar extends JFrame {
 		JButton btnNewButton = new JButton("Registrarse");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Registro r = new Registro ();
+				Registro r = new Registro (c);
 				setVisible(false);
 				r.setVisible(true);
 			}
@@ -57,7 +55,7 @@ public class registrarIniciar extends JFrame {
 		JButton btnNewButton_1 = new JButton("Iniciar Sesion");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaUsuario VenUs = new VentanaUsuario ();
+				VentanaUsuario VenUs = new VentanaUsuario (c);
 				setVisible(false);
 				VenUs.setVisible(true);
 			}
@@ -69,5 +67,19 @@ public class registrarIniciar extends JFrame {
 		label.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
 		label.setBounds(147, 29, 140, 19);
 		contentPane.add(label);
+		
+		JButton button = new JButton("Volver\r\n");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaPrincipal vp = new VentanaPrincipal (c);
+				vp.setVisible(true);
+				setVisible(false);
+			}
+		});
+		button.setForeground(Color.BLACK);
+		button.setFont(button.getFont().deriveFont(button.getFont().getStyle() | Font.BOLD | Font.ITALIC));
+		button.setBackground(Color.MAGENTA);
+		button.setBounds(175, 215, 89, 23);
+		contentPane.add(button);
 	}
 }

@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,14 +10,13 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class VentanaCrearCharla extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtIdCharla;
 	private JTextField txtDur;
@@ -31,11 +29,12 @@ public class VentanaCrearCharla extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {   //Esta ventana es para crear una charla y se agrega a la lista
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaCrearCharla frame = new VentanaCrearCharla();
+					Congreso c = new Congreso ();
+					VentanaCrearCharla frame = new VentanaCrearCharla (c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +47,9 @@ public class VentanaCrearCharla extends JFrame {
 	 * Create the frame.
 	 * @throws ParseException 
 	 */
-	public VentanaCrearCharla() {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public VentanaCrearCharla(Congreso c) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 412);
 		contentPane = new JPanel();
@@ -80,7 +81,7 @@ public class VentanaCrearCharla extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdmin2 vntAd2 = new VentanaAdmin2 ();
+				VentanaAdmin2 vntAd2 = new VentanaAdmin2 (c);
 				setVisible(false);
 				vntAd2.setVisible(true);
 			}
@@ -91,13 +92,7 @@ public class VentanaCrearCharla extends JFrame {
 		contentPane.add(btnVolver);
 		
 		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			VentanaOpcionDeseaAgregarCharla ventOp = new VentanaOpcionDeseaAgregarCharla (); 
-			setVisible(false);
-			ventOp.setVisible(true);
-			}
-		});
+
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
 		btnNewButton.setBackground(Color.RED);
 		btnNewButton.setBounds(248, 339, 89, 23);
@@ -136,7 +131,7 @@ public class VentanaCrearCharla extends JFrame {
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("MM/dd/YYYY\r\n\r\n");
-		lblNewLabel_6.setBounds(240, 120, 72, 20);
+		lblNewLabel_6.setBounds(238, 129, 72, 20);
 		contentPane.add(lblNewLabel_6);
 		
 		txtNombreEx = new JTextField();
@@ -167,54 +162,77 @@ public class VentanaCrearCharla extends JFrame {
 		contentPane.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Ej: 08/22/2018");
-		lblNewLabel_10.setBounds(240, 136, 86, 14);
+		lblNewLabel_10.setBounds(100, 159, 86, 14);
 		contentPane.add(lblNewLabel_10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Asientos 50", "Asientos 60", "Asientos 70"}));
-		comboBox.setBounds(391, 129, 130, 20);
-		contentPane.add(comboBox);
+		JComboBox opcionesAsiento = new JComboBox();
+		opcionesAsiento.setModel(new DefaultComboBoxModel(new String[] {"Asientos 50", "Asientos 60", "Asientos 70"}));
+		opcionesAsiento.setBounds(391, 126, 130, 20);
+		contentPane.add(opcionesAsiento);
 		
+		JLabel lblCantidadAsientos = new JLabel("Cant Asientos\r\n");
+		lblCantidadAsientos.setBounds(315, 132, 72, 14);
+		contentPane.add(lblCantidadAsientos);
 		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String idCharla,strDuracion,fecha,nombre,rut,tema,idSala;
+				int duracion;
+				
+				idCharla =  txtIdCharla.getText();
+				strDuracion = txtDur.getText();
+				fecha = txtFecha.getText();
+				nombre = txtNombreEx.getText();
+				rut = txtRutEx.getText();
+				tema = txtTemaEx.getText();
+				idSala = txtIdSala.getText();
+				duracion = Integer.parseInt(strDuracion);
+				
+				
+				
+				/*if (Miscelaneo.esNumerico(strDuracion)) { //Se comprueba si fue numerico el numero ingresado en
+				duracion = Integer.parseInt(strDuracion); //Se obtiene la duracion desde el 
+				charlita.setDuracion(duracion); 
+				//}*/
+				
+				Expositor ex = new Expositor ();
+				ex.setNombre(nombre);
+				ex.setRut(rut);
+				ex.setTema(tema);
+				//thegame
+				int cantAs;
+				String str = (String)opcionesAsiento.getSelectedItem(); //Se obtiene la opcion del combo box
 
-		
-		String idCharla,strDuracion,fecha,nombre,rut,tema,idSala;
-		int duracion;
-		
-		idCharla =  txtIdCharla.getText();
-		strDuracion = txtDur.getText();
-		fecha = txtFecha.getText();
-		nombre = txtNombreEx.getText();
-		rut = txtRutEx.getText();
-		tema = txtTemaEx.getText();
-		idSala = txtIdSala.getText();
-		Charla charlita = new Charla ();
-		
-		Miscelaneo mi = new Miscelaneo ();
-		
-		if (mi.esNumerico(strDuracion)) { //Se comprueba si fue numerico el numero ingresado en
-		duracion = Integer.parseInt(strDuracion); //Se obtiene la duracion desde el 
-		charlita.setDuracion(duracion); 
-		}
-		
-		Expositor ex = new Expositor ();
-		ex.setNombre(nombre);
-		ex.setRut(rut);
-		ex.setTema(tema);
-		
-		Sala sa = new Sala ();
-		sa.setIdSala(idSala);
+				switch(str) {
+				case "Asientos 50":
+					cantAs=50;
+					break;
+					
+				case "Asientos 60":
+					cantAs=60;
+					break;
+					
+				case "Asientos 70": //¿70?
+					cantAs=70;
+					break;
+				default:
+					cantAs =0;
+				}
+				
+				
+				Charla charlita = new Charla (idCharla, duracion, ex, idSala, fecha, cantAs);
 
+		    
+		    	c.agregarCharla(charlita); 
+		    	
+				VentanaOpcionDeseaAgregarCharla ventOp = new VentanaOpcionDeseaAgregarCharla (c); 
+				setVisible(false);
+				ventOp.setVisible(true);
+			}
+		});
 		
 		
-    	charlita.setIdCharla(idCharla);
-    	charlita.setExpositor(ex);
-    	charlita.setSalaAsignada(sa);
-    	charlita.setFecha(fecha);  
-    	
-    	Congreso c = new Congreso ();
-    	ListaCharlas charlas = c.obtenerL(); 
-		charlas.agregarCharla(charlita);  //Se agrega la charla creada en la lista
+		
 		
 	}
 }

@@ -26,7 +26,7 @@ public class Asiento {
 	public void setIdAsiento(String idAsiento) {  this.idAsiento=idAsiento;  }
 	public String getIdAsiento() { return idAsiento; }
 	public void setIdSala (String idSala) {this.idSala=idSala; }
-	public String getIdSala() {return idSala; }
+	public String getIdSala() {System.out.println(idSala); return idSala; }
 	public void setAsientoOcupado() { this.ocupado=true; }
 	public void setAsientoLibre() { this.ocupado=false; }
 	public boolean getEstadoAsiento() { return ocupado; }

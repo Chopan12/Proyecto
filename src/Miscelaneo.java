@@ -1,7 +1,8 @@
 
-public class Miscelaneo {
+public class Miscelaneo { /*Aqui iran metodos de utilidad publica por asi decirlo, 
+						  como por ejemplo, comprobar si es numerico algo introducido en una ventana*/
 	
-    public static boolean esNumerico(String cadena) { //Comprobar si un metodo es numerico
+    public static boolean esNumerico(String cadena) { //Comprobar si el dato es numerico
 
         boolean resultado;
 

@@ -1,65 +1,109 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Exportar {
 	
-/*public void exportar (Congreso c) {
-		ListaCharlas LiCh = c.obtenerL();
-		MapaUsuarios MaUs = c.obtenerMaUs();
-		MapaAsientos MaAs = c.obtenerMaAs();
-		MapaSalas MaSa = c.obtenerMaSa();
-}*/
-	
-	public void exportarCh (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
-		ListaCharlas LiCh = co.obtenerL();
+	public void exportarCharlas (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
+		ArrayList<Charla> listaCh = co.obtenerL();
 		PrintWriter sobreEscribe = new PrintWriter ("charlas.txt","UTF-8"); //Para escribir en el archivo
 		
-			for (int x=0; x<LiCh.tamanio(); x++) {
-				Charla ch = LiCh.obtenerCharla(x);
-				String a = ch.getIdCharla();
-					sobreEscribe.write(a); 
+			for (int x=0; x<listaCh.size(); x++) { //Proceso para escribir en el archivo, para el programa para usar el importar mas tarde
+				Charla ch = listaCh.get(x);
+					sobreEscribe.write(ch.getIdCharla()); 
 					sobreEscribe.write(";"); //Cada punto coma es para separar las palabras en los archivos para que el importar funcione
-				String b = Integer.toString(ch.getDuracion());
-					sobreEscribe.write(b);
+					String duracion = Integer.toString(ch.getDuracion());
+					sobreEscribe.write(duracion);
 					sobreEscribe.write(";");
-				String c = ch.getFecha();
-					String[] p = new String [3];
-					p = c.split("/"); //Desde aqui 
-					String d = p[0]; //Mes 
-						sobreEscribe.write(d);
-						sobreEscribe.write(";");
-				String e = p[1]; //Dia 
-					sobreEscribe.write(e);
+					String fecha = ch.getFecha();
+					String[] arrFecha = new String [3]; //Pos 0 = Mes, Pos 1 = Dia, Pos 2 = Año
+					arrFecha = fecha.split("/"); //Desde aqui 
+					sobreEscribe.write(arrFecha[0]); //Mes
 					sobreEscribe.write(";");
-				String f = p[2];	//Año
-					sobreEscribe.write(f);
+					sobreEscribe.write(arrFecha[1]); //Dia
+					sobreEscribe.write(";");
+					sobreEscribe.write(arrFecha[2]);
 					sobreEscribe.write(";"); //Hasta aca se escribe cada componente de la fecha en el proceso
+					
 				Expositor ex = ch.getExpositor();
-				String g = ex.getNombre();
-					sobreEscribe.write(g);
+					sobreEscribe.write(ex.getNombre());
 					sobreEscribe.write(";");
-				String h = ex.getRut();
-					sobreEscribe.write(h);
+					sobreEscribe.write(ex.getRut());
 					sobreEscribe.write(";");
-				String i = ex.getTema();
-					sobreEscribe.write(i);
+					sobreEscribe.write(ex.getTema());
 					sobreEscribe.write(";");
+					
 				Sala sa = ch.getSalaAsignada();
-				String j = 	sa.getIdSala();
-					sobreEscribe.write(j);
+					sobreEscribe.write(sa.getIdSala());
 					sobreEscribe.write(";");
-					sobreEscribe.close();
+					System.out.println(sa.getCapacTotal());
+					sobreEscribe.write(""+sa.getCapacTotal());
+					sobreEscribe.write(";\n");
 			}
+			sobreEscribe.close();
+	}
+	public void exportarCharlas (Congreso co,String ruta) throws FileNotFoundException, UnsupportedEncodingException { //Sobrecarga de metodos para reporte por archivo para usuario
+		ArrayList<Charla> listaCh = co.obtenerL();
+		PrintWriter sobreEscribe = new PrintWriter (ruta,"UTF-8"); //Para escribir en el archivo
+		
+			for (int x=0; x<listaCh.size(); x++) { //Proceso para escribir en el archivo
+					Charla ch = listaCh.get(x);
+					sobreEscribe.write(ch.getIdCharla()); 
+				
+					
+					sobreEscribe.write("(Este elemento debe ingresar en la ventana);"); //Cada punto coma es para separar las palabras en los archivos para que este separado para el usuario
+					sobreEscribe.write(ch.getFecha());
+					sobreEscribe.write(";");
+					
+				Expositor ex = ch.getExpositor();
+					sobreEscribe.write(ex.getNombre());
+					sobreEscribe.write(";");
+					sobreEscribe.write(ex.getTema());
+					sobreEscribe.write(";");
+					
+				Sala sa = ch.getSalaAsignada();
+					sobreEscribe.write(sa.getIdSala());
+					sobreEscribe.write(";");
+					sobreEscribe.write("\n");
+			}
+			sobreEscribe.close();
 	}
 			
-		public void exportarSa (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
-				MapaSalas MaSa = co.obtenerMaSa();
-				PrintWriter sobreEscribe = new PrintWriter ("salas.txt","UTF-8"); //Para escribir en el archivo
-				for ()
-				Sala sa = MaSa.
+		public void exportarAsiento (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
+			MapaAsientos mapaAsiento = co.obtenerMaAs();
+			PrintWriter sobreEscribe = new PrintWriter ("asientos.txt","UTF-8"); //Para escribir en el archivo
+			for (String clave: mapaAsiento.obtenerClaves()) { //Obtener claves es una funcion keySet
+				Asiento as = mapaAsiento.obtenerAsiento(clave);//Se obtiene cada object del mapa con el for
+				sobreEscribe.write(as.getIdAsiento());
+				//System.out.println(as.getIdAsiento());
+				//System.out.println(as.getIdSala());
+				sobreEscribe.write(";");
+				sobreEscribe.write(as.getIdSala());
+				sobreEscribe.write(";");
+				sobreEscribe.write( (as.getEstadoAsiento())? "true":"false" ); //Condicion que evalua si es true o false, si es true imprime true, sino imprime false
 				sobreEscribe.close();
-				
 			}
 		}
+			
+		public void exportarUsuarios (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
+			MapaUsuarios mapaUs = co.obtenerMaUs();
+			PrintWriter sobreEscribe = new PrintWriter ("usuarios.txt","UTF-8"); //Para escribir en el archivo
+			for(String clave: mapaUs.obtenerClaves()) {
+				Usuario us = mapaUs.buscarUsuario(clave);
+				sobreEscribe.write(us.getNombre());
+				sobreEscribe.write(";");
+				sobreEscribe.write(us.getRut());
+				sobreEscribe.write(";");
+				sobreEscribe.write(us.getClave());
+				sobreEscribe.close();
+			}
+		}
+		
+		public void exportarTodo (Congreso c) throws FileNotFoundException, UnsupportedEncodingException {
+			exportarAsiento (c);
+			exportarCharlas (c);
+			exportarUsuarios(c);
+		}
+}
 	
 
 

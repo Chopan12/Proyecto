@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,15 +7,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class VentanaPrincipal extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -40,7 +38,7 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal(Congreso c) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 204, 204));
@@ -60,7 +58,7 @@ public class VentanaPrincipal extends JFrame {
 		btnNewButton_1.setForeground(Color.BLUE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			registrarIniciar ventanaUs = new registrarIniciar ();
+			VentanaRegistrarIniciar ventanaUs = new VentanaRegistrarIniciar (c);
 			setVisible (false);
 			ventanaUs.setVisible (true);
 			}
@@ -71,7 +69,8 @@ public class VentanaPrincipal extends JFrame {
 		JButton btnNewButton_2 = new JButton("Administrador\r\n");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdmin ventanaAd = new VentanaAdmin ();
+				VentanaAdmin ventanaAd = new VentanaAdmin (c);
+
 				setVisible(false);
 				ventanaAd.setVisible(true);
 			}
@@ -89,6 +88,7 @@ public class VentanaPrincipal extends JFrame {
 		JButton btnNewButton = new JButton("Cerrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Aqui ira el exportar 
 				setVisible (false);
 			}
 		});

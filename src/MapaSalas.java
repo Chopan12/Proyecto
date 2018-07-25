@@ -1,9 +1,10 @@
-import java.io.BufferedReader;
+/*import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Hashtable;
+import java.util.Set;
 public class MapaSalas {
 	private Hashtable<String, Sala> mapaSalas;
 	
@@ -25,18 +26,15 @@ public class MapaSalas {
 		return false;
 	}
 
-	public void añadirAsiento(Sala sala, Asiento asiento) {
-		Sala aux=new Sala();
-		String id=sala.getIdSala();
-		aux=mapaSalas.get(id);
-		mapaSalas.remove(id);
-		aux.agregarAsiento(asiento);
-		mapaSalas.put(id, aux);
-	}
+
 	
 	public Sala encontrarSala (String id) { //Encontrara sala atraves del id y la retornara
 		return mapaSalas.get(id);
 		
+	}
+	
+	public void eliminarSala (String idSala) {
+		if(mapaSalas.containsKey(idSala))mapaSalas.remove(idSala);
 	}
 
 	public void importar (MapaAsientos mapAs) throws ParseException, IOException {
@@ -62,5 +60,8 @@ public class MapaSalas {
 		
 	
 		}
+	public Set<String> obtenerClaves () {
+		return mapaSalas.keySet();	
 	}
-
+}
+*/

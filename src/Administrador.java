@@ -3,7 +3,7 @@ public class Administrador extends Persona{
 	private String clave;
 	
 	public Administrador() {
-		super(); //Herencia de persona, que poseia rut
+		super(); //Herencia de persona, que poseia rut y nombre
 	}
 	
 	public Administrador(String nombre, String rut, String clave) {

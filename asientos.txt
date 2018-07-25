@@ -1,3 +1,0 @@
-A21;A2;false
-B21;B2;false
-C21;C2;true

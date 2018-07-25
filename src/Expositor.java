@@ -13,6 +13,11 @@ public class Expositor extends Persona{
 	}
 	
 	
+/*	public Expositor(String nomExpositor) {
+		super(nomExpositor);
+		tema=null;
+	}
+*/
 	public void setTema(String tema) { this.tema=tema; }
 	public String getTema() { return tema; }
 	

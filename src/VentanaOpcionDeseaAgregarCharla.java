@@ -1,7 +1,4 @@
-	
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+	import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,16 +12,15 @@ import java.awt.event.ActionEvent;
 
 public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaOpcionDeseaAgregarCharla frame = new VentanaOpcionDeseaAgregarCharla();
+					Congreso c = new Congreso ();
+					VentanaOpcionDeseaAgregarCharla frame = new VentanaOpcionDeseaAgregarCharla(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +31,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaOpcionDeseaAgregarCharla() {
+	public VentanaOpcionDeseaAgregarCharla(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -44,7 +40,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Desea agregar otra ventana?");
+		JLabel lblNewLabel = new JLabel("Desea agregar otra charla?");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblNewLabel.setBounds(91, 37, 266, 35);
 		contentPane.add(lblNewLabel);
@@ -52,7 +48,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 		JButton btnNewButton = new JButton("SI\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCrearCharla vntCrCh = new VentanaCrearCharla();
+				VentanaCrearCharla vntCrCh = new VentanaCrearCharla(c);
 				setVisible (false);
 				vntCrCh.setVisible(true);
 			}
@@ -65,7 +61,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 		JButton btnNewButton_1 = new JButton("NO\r\n");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaAdmin2 vntAd = new VentanaAdmin2 ();
+				VentanaAdmin2 vntAd = new VentanaAdmin2 (c);
 				setVisible(false);
 				vntAd.setVisible(true);
 			}

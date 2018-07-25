@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.util.Set;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,6 +20,17 @@ public class MapaAsientos {
         listaAsientos=new ArrayList<Asiento>(mapaAsientos.values());
     }
 	
+	public MapaAsientos(int capacTotal, String idSala) {
+		mapaAsientos=new Hashtable<String, Asiento>();
+		String idAs;
+		for(int i=1 ;i<=capacTotal ; i++) {
+			idAs = idSala + i;
+			mapaAsientos.put(idAs, new Asiento(idAs, idSala));
+			
+		}
+		listaAsientos=new ArrayList<Asiento>(mapaAsientos.values());
+	}
+
 	public void agregarAsiento(Asiento asiento) { //hay que verificar que el asiento no se encuentra ya en el usuario, a futuro agregar opcion para meterlo también al arraylist
 		String key=asiento.getIdAsiento();
 		if(mapaAsientos.containsKey(key))return;//cada silla tiene id único, así que basta con esto para saber si el asiento se encuentra agregado o no
@@ -52,16 +64,14 @@ public class MapaAsientos {
 	}
 
 	public Asiento obtenerAsiento(String idAsiento) {
-		System.out.println("llegué acá");
 		if(mapaAsientos.containsKey(idAsiento)) {
-			
 			return mapaAsientos.get(idAsiento);
 		}
 		
 		return null;
 	}
 	
-	public MapaAsientos obtenerAsientos(String idSala){ //SE ROMPIO EL ENCAPSULAMIENTO
+	public MapaAsientos obtenerAsientos(String idSala){//Este metodo se utiliza solo para el importar TODO:SE ROMPIO EL ENCAPSULAMIENTO
         ArrayList<Asiento> listaAsientos = new ArrayList<Asiento>(mapaAsientos.values()); //Se copian los objetos que contiene el mapaAsientos dentro de un nuevo arrayList para ser utilizado
         Hashtable<String, Asiento> mapa=new Hashtable<String, Asiento>();
         for(Asiento i : listaAsientos) {
@@ -71,6 +81,11 @@ public class MapaAsientos {
 
         return new MapaAsientos(mapa);
     }
+	
+	/*public void eliminarAsiento(String idAsiento, String idSala) {
+		Asiento asiento = new Asiento(idAsiento, idSala);
+		if(mapaAsientos.contains(asiento))
+	}*/
 	
 	public void importar () throws ParseException, IOException  { //Funcion para importar asiento
 		String linea;
@@ -92,12 +107,14 @@ public class MapaAsientos {
 				agregarAsiento(as); //Se agrega al mapa el asiento creado 
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	
 		}
+	public Set<String> obtenerClaves () {
+		return mapaAsientos.keySet();	 
+	}
 		
 	}
 	

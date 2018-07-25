@@ -1,6 +1,3 @@
-
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,13 +7,12 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JProgressBar;
 
 public class VentanaUsuario2 extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -26,7 +22,9 @@ public class VentanaUsuario2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaUsuario2 frame = new VentanaUsuario2();
+					Congreso c = new Congreso ();
+					Usuario us = new Usuario();
+					VentanaUsuario2 frame = new VentanaUsuario2(c, us);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +36,7 @@ public class VentanaUsuario2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaUsuario2() {
+	public VentanaUsuario2(Congreso c, Usuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -55,7 +53,7 @@ public class VentanaUsuario2 extends JFrame {
 		JButton btnVolverUs1 = new JButton("Volver\r\n");
 		btnVolverUs1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaUsuario ventUs = new VentanaUsuario ();
+				VentanaUsuario ventUs = new VentanaUsuario (c);
 				setVisible (false);
 				ventUs.setVisible (true);
 			}
@@ -67,24 +65,47 @@ public class VentanaUsuario2 extends JFrame {
 		contentPane.add(btnVolverUs1);
 		
 		JButton btnAgregar = new JButton("Agregar charla para asistir");
+		btnAgregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaAgrChr v = new VentanaAgrChr (c,us);
+				v.setVisible(true);
+			}
+		});
 		btnAgregar.setForeground(new Color(0, 204, 255));
 		btnAgregar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnAgregar.setBounds(10, 75, 200, 23);
 		contentPane.add(btnAgregar);
 		
 		JButton btnEliminarCharlaPara = new JButton("Eliminar charla para asistir\r\n");
+		btnEliminarCharlaPara.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaEliminarCharla v = new VentanaEliminarCharla (us);
+				v.setVisible(true);
+			}
+		});
 		btnEliminarCharlaPara.setForeground(new Color(0, 204, 255));
 		btnEliminarCharlaPara.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnEliminarCharlaPara.setBounds(224, 75, 200, 23);
 		contentPane.add(btnEliminarCharlaPara);
 		
 		JButton btnVerCharlas = new JButton("Ver charlas propias\r\n\r\n");
+		btnVerCharlas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Reporte de pene
+			}
+		});
 		btnVerCharlas.setForeground(Color.GREEN);
 		btnVerCharlas.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnVerCharlas.setBounds(107, 128, 200, 23);
 		contentPane.add(btnVerCharlas);
 		
-		JButton btnEliminarTodo = new JButton("Eliminar todo");
+		JButton btnEliminarTodo = new JButton("Eliminar todo"); //Boton 
+		btnEliminarTodo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				us.eliminarCharlas();
+			}
+		});
 		btnEliminarTodo.setForeground(Color.RED);
 		btnEliminarTodo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnEliminarTodo.setBounds(107, 171, 200, 23);

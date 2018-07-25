@@ -1,6 +1,3 @@
-
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,12 +9,12 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
 public class VentanaUsuario extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField ingresarRut;
 	private JPasswordField ingresarClave;
@@ -29,7 +26,8 @@ public class VentanaUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaUsuario frame = new VentanaUsuario();
+					Congreso c = new Congreso ();
+					VentanaUsuario frame = new VentanaUsuario(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +39,7 @@ public class VentanaUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaUsuario() {
+	public VentanaUsuario(Congreso c) {
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -60,10 +58,9 @@ public class VentanaUsuario extends JFrame {
 		JButton botonVolverUs = new JButton("Volver\r\n");
 		botonVolverUs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Congreso c = new Congreso ();
-				VentanaPrincipal ventanaPrincipal2 = new VentanaPrincipal (c);
+				VentanaRegistrarIniciar vp = new VentanaRegistrarIniciar (c);
 				setVisible(false);
-				ventanaPrincipal2.setVisible(true);
+				vp.setVisible(true);
 			}
 		});
 		botonVolverUs.setForeground(Color.BLACK);
@@ -82,9 +79,7 @@ public class VentanaUsuario extends JFrame {
 		contentPane.add(ingresarClave);
 		ingresarClave.setColumns(10);
 
-		String rut,clave;
-		rut = ingresarRut.getText();
-		clave = ingresarClave.getText();
+		
 		
 		JLabel lblNewLabel = new JLabel("Rut :\r\n\r\n\r\n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -98,13 +93,25 @@ public class VentanaUsuario extends JFrame {
 		
 		JButton btnContinuar_1 = new JButton("Continuar\r\n");
 		btnContinuar_1.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				MapaUsuarios mapUs = new MapaUsuarios ();
-				Usuario usuario = new Usuario ();
-				//if mapUs.existeUsuario(usuario)
-				VentanaUsuario2 ventanaUs2 = new VentanaUsuario2 ();
-				setVisible (false);
-				ventanaUs2.setVisible(true);
+				String rut,clave;
+				rut = ingresarRut.getText();
+				clave = ingresarClave.getText();
+				MapaUsuarios m = c.obtenerMaUs();
+				if (m.existeUsuario(rut)) {
+					Usuario us = m.buscarUsuario(rut);
+					if (us.getClave().equals(clave)) {
+						VentanaUsuario2 ventanaUs2 = new VentanaUsuario2 (c, us);
+						setVisible (false);
+						ventanaUs2.setVisible(true);
+					}else {
+						setVisible (false);
+					}
+				}else {
+					setVisible(false);
+				}
+				
 			}
 		});
 		btnContinuar_1.setForeground(Color.BLACK);

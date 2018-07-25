@@ -4,20 +4,14 @@ public class Charla {
 	private String fecha;
 	private Expositor expositor;
 	private Sala salaAsignada; //para poder ver a que sala está asignada la charla
-	public Charla() {
-		this.idCharla=null;
-		this.fecha=null;
-		this.expositor=new Expositor();
-		this.salaAsignada=new Sala();
-		this.duracion=0;
-	}
 	
-	public Charla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha) {
+	public Charla(String idCharla, int duracion, Expositor expositor, String idSala, String fecha, int capSala) {
 		this.idCharla = idCharla;
 		this.expositor=expositor;
-		salaAsignada=sala;
 		this.fecha=fecha;
 		this.duracion=duracion;
+		this.salaAsignada= new Sala (idSala, capSala);
+		
 		
 	}
 	
@@ -36,7 +30,6 @@ public class Charla {
 		return salaAsignada.getIdSala();
 	}
 
-	
 	
 /*
 	

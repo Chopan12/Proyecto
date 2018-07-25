@@ -1,60 +1,70 @@
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 public class Congreso {
 	private ListaCharlas charlas;
 	private MapaUsuarios usuarios;
-	private MapaSalas salas;
 	private MapaAsientos asientos;
 	
 	public Congreso() {
 		this.charlas=new ListaCharlas();
 		this.usuarios=new MapaUsuarios();
-		this.salas=new MapaSalas();
 		this.asientos=new MapaAsientos();
 	}
 	
 	public void agregarCharla(Charla charla) {
-		if(charlas.tamanio()==0) {
+		if(charlas.size()==0) {
 			charlas.agregarCharla(charla);
 			return;
 		}
-		if(!charlas.recorrerCharlas(charla.getIdCharla())) {
+		if(charlas.obtenerCharla(charla)==null) {
 			charlas.agregarCharla(charla);
 		}
 	}
-	public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha) {
-		charlas.agregarCharla(idCharla,duracion, expositor, sala, fecha);
+	
+	@SuppressWarnings("unused")
+	public void reporte(String tipo) {
+		VentanaReporte v;
+		Reporte r;
+		switch(tipo) {
+		case "Charlas":
+			r = charlas;
+			break;
+		case "Usuarios":
+			r = usuarios;
+			break;
+		default:
+			return;
+		}
+		v = new VentanaReporte(r);
+		v.setVisible(true);
 	}
+	
+	
+	/*public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha) {
+		charlas.agregarCharla(idCharla,duracion, expositor, sala, fecha);
+	}*/
 	
 	public void agregarUsuario(Usuario usuario) {
 		usuarios.agregarUsuario(usuario);
 	}
 	
 	public void eliminarUsuario(Usuario usuario) {
-		usuarios.eliminarUsuarios(usuario);
+		usuarios.eliminarUsuario(usuario);
 	}
 	
-	public void agregarSala(Sala sala) {
-		salas.añadirSala(sala);
-	}
-	public void agregarAsientoASala(Sala sala, Asiento asiento) {
-		if(salas.encontrarSala(sala)){
-			salas.añadirAsiento(sala, asiento);
-		}
-	}
 	
-	public ListaCharlas obtenerL () {
-		return charlas;
+	
+	public ArrayList<Charla> obtenerL () {
+		return charlas.obtenerL();
 	}
 	
 	public MapaUsuarios obtenerMaUs () {
 		return usuarios;
 	}
 	
-	public MapaSalas obtenerMaSa () {
-		return salas;
-	}
+	
 	
 	public MapaAsientos obtenerMaAs () {
 		return asientos;
@@ -98,8 +108,8 @@ public class Congreso {
 	
 	public void importar () throws ParseException, IOException {
 		asientos.importar();
-		salas.importar(asientos);
-		charlas.importar(salas);	
+		charlas.importar();	
+		usuarios.importar();
 	}
 	
 }

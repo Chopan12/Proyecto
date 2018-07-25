@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,11 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
-import java.awt.SystemColor;
 import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JMenuBar;
-import javax.swing.JButton;
+	import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -18,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 public class VentanaAdmin extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField textField_1;
@@ -29,7 +26,8 @@ public class VentanaAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAdmin frame = new VentanaAdmin();
+					Congreso c = new Congreso ();
+					VentanaAdmin frame = new VentanaAdmin(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +39,7 @@ public class VentanaAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAdmin() {
+	public VentanaAdmin(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -95,7 +93,7 @@ public class VentanaAdmin extends JFrame {
 		JButton button = new JButton("Continuar\r\n");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdmin2 ventanaAdmin2 = new VentanaAdmin2 ();
+				VentanaAdmin2 ventanaAdmin2 = new VentanaAdmin2 (c);
 				setVisible(false);
 				ventanaAdmin2.setVisible(true);
 			}

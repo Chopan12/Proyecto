@@ -1,45 +1,66 @@
 import java.util.ArrayList;
 public class Usuario extends Persona {
 	private String clave;
-	private ArrayList<Asiento> asientosAsociados; //charlas a las cuales el usuario asistirá
-	//hay que comprobar que el asiento en la charla en especifico existe, y luego mandar a agregar a este metodo
+	private ArrayList<Charla> charlasAsociadas; //charlas a las cuales el usuario asistirá
+	
 	public Usuario() {
 		super();
 		this.clave=null;
-		this.asientosAsociados= new ArrayList<Asiento>();
+		this.charlasAsociadas= new ArrayList<Charla>();
 	}
-	public void setClave(String clave) { this.clave = clave;}
-	public String getClave() { return clave; }
 	
-	public String getNombre() {
-		String nombre=this.getNombre();
-		return nombre;
-	}
-
 	public Usuario(String nombre, String rut, String clave) {
 		super(nombre, rut);
 		this.clave=clave;
-		this.asientosAsociados=new ArrayList<Asiento>();
+		this.charlasAsociadas=new ArrayList<Charla>();
 	}
-
 	
-	public boolean recorrerAsientos(String idAsiento) {//para recorrer los asientos y verificar si, por id, ya se encuentra en sus asientos asociados
-		if(asientosAsociados.size()==0)return false;//no tiene nada dentro
+	/*public boolean recorrerAsientos(String idAsiento, String idSala) {//para recorrer los asientos y verificar si, por id, ya se encuentra en sus asientos asociados
+		if(charlasAsociadas.size()==0)return false;//no tiene nada dentro
 		Asiento asiento;
-		String id;
-		for(int i=0; i<asientosAsociados.size(); i++) {
-			asiento=asientosAsociados.get(i);
-			id=asiento.getIdAsiento();
-			if(id.equals(idAsiento))return true;
+		String idAs, idSal;
+		for(int i=0; i<charlasAsociadas.size(); i++) {
+			asiento=charlasAsociadas.get(i);
+			idAs=asiento.getIdAsiento();
+			idSal=asiento.getIdSala();
+			if(idAs.equals(idAsiento)&&idSal.equals(idSal))return true;
+		}
+		return false;
+	}*/
+	
+	public void agregarCharla(Charla charla) {
+		if(charlasAsociadas.contains(charla))return;
+		charlasAsociadas.add(charla);
+	}
+	
+	public void eliminarCharla (String idCharla) {
+		Charla charla;
+		for(int i=0; i<charlasAsociadas.size(); i++) {
+			charla=charlasAsociadas.get(i);
+			if(charla.getIdCharla().equals(idCharla))charlasAsociadas.remove(i);
+		}
+	}
+	
+	public void eliminarCharlaPorExpositor(String nomExpositor,Usuario us) {
+		Charla charla;
+		for(int i=0; i<us.getListaCharlas().size(); i++) {
+			charla=us.getListaCharlas().get(i);
+			if(charla.getExpositor().getNombre().equals(nomExpositor))us.getListaCharlas().remove(charla);
+			
+		}
+	}
+	public boolean comprobarExpositor (String nomExpositor,Usuario us) {
+		Charla ch;Expositor ex;
+		for (int i=0; i<us.getListaCharlas().size(); i++) {
+			ch = us.getListaCharlas().get(i);
+			ex = ch.getExpositor();
+			if (ex.getNombre().equals(nomExpositor)) {return true;}
 		}
 		return false;
 	}
-	public void agregarAsiento(Asiento asiento) {
-		String id=asiento.getIdAsiento();
-		//if(asientosAsociados.size()==1)return;//solo existe un elemento, por lo que la verificacion es innecesaria
-		if(!recorrerAsientos(id)) {
-			asientosAsociados.add(asiento);
-		}
+	
+	public void eliminarCharlas() {
+		charlasAsociadas.removeAll(charlasAsociadas);
 	}
 	
 
@@ -62,19 +83,25 @@ public class Usuario extends Persona {
 		}catch(NumberFormatException e) {
 			return false;
 		}
-		
 		return true;
 	}
-	public Asiento getAsiento(String idAsiento) { //para obtener el asiento (que es único por id) el cual se está buscando por id
-		Asiento asiento;
+	
+	public Charla getCharla(String idCharla) { //se obtiene la charla mediante su id
+		Charla charla;
 		String key;
-		for(int i=0; i<asientosAsociados.size(); i++) {
-			asiento=asientosAsociados.get(i);
-			key=asiento.getIdAsiento();
-			if(key.equals(idAsiento))return asiento;
+		for(int i=0; i<charlasAsociadas.size(); i++) {
+			charla=charlasAsociadas.get(i);
+			key=charla.getIdCharla();
+			if(key.equals(idCharla))return charla;
 		}
 		return null;
 	}
+	
+	//Setters y getters
+	
+	public void setClave(String clave) { this.clave = clave;}
+	public String getClave() { return clave; }
+	public ArrayList<Charla> getListaCharlas(){return charlasAsociadas;}	
 }
 
 

@@ -26,7 +26,7 @@ public class VentanaAgrChr extends JFrame {
 		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.WHITE);
+		contentPane.setBackground(new Color(153, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 	    ArrayList<Charla> listilla = c.obtenerL();
@@ -35,7 +35,7 @@ public class VentanaAgrChr extends JFrame {
 	    List l = new List();
 		l.setBounds(0, 10, 434, 113);
 		 for(Charla charla : listilla) {
-		    	l.add("id:" + charla.getIdCharla() + " exp:" + charla.getExpositor().getNombre() + " fecha:" + charla.getFecha() + " sala:" + charla.getIdSala());
+		    	l.add("Id:" + charla.getIdCharla() + " Exp:" + charla.getExpositor().getNombre() + " Tema:" + charla.getExpositor().getTema() + " Fecha:" + charla.getFecha() + " Sala:" + charla.getIdSala());
 		    }
 		
 		contentPane.setLayout(null);
@@ -64,28 +64,39 @@ public class VentanaAgrChr extends JFrame {
 		lblIngreseAquiEl.setBounds(10, 109, 170, 14);
 		contentPane.add(lblIngreseAquiEl);
 		
-		JLabel lblALaCual = new JLabel("a la cual le interesa ir :");
-		lblALaCual.setBounds(10, 131, 108, 14);
+		JLabel lblALaCual = new JLabel("Ingrese el id de la charla a la cual le interesa ir:\r\n");
+		lblALaCual.setBounds(10, 131, 328, 14);
 		contentPane.add(lblALaCual);
 		
 		idCh = new JTextField();
-		idCh.setBounds(207, 128, 86, 20);
+		idCh.setBounds(10, 156, 86, 20);
 		contentPane.add(idCh);
 		idCh.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("ID\r\n");
 		lblNewLabel_1.setForeground(Color.RED);
 		lblNewLabel_1.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(303, 130, 46, 14);
+		lblNewLabel_1.setBounds(101, 156, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JButton button_1 = new JButton("Aceptar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ListaCharlas lCh = new ListaCharlas (); 
 				String s = idCh.getText();
-				Charla ch = lCh.buscarCharla(s);
+				if (s.equals("")) {
+					VentanaAviso.infoVentana("Debe ingresar una id", "Error");
+				}
+				VentanaUsuario2 v2 = new VentanaUsuario2 (c,us);
+				ListaCharlas lCh = c.obtenerLiCh();
+				if (lCh.buscarCharla(s)!=null) {
+				VentanaAviso.infoVentana("Charla agregada correctamente", "Aviso");
+				Charla ch = c.obtenerCharla(s); 
 				us.agregarCharla(ch);
+				setVisible(false);
+				v2.setVisible(true);
+				}else {
+					VentanaAviso.infoVentana("La charla no existe", "Error");
+				}
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));

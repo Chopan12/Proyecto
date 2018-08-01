@@ -6,60 +6,66 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.List;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class VentanaEliminarCharla extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField nombreExp;
+	private JTextField idCharla;
 
 
 	public VentanaEliminarCharla(Usuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 545, 373);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(204, 255, 204));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		idCharla = new JTextField();
+		idCharla.setColumns(10);
+		idCharla.setBounds(10, 211, 86, 20);
+		contentPane.add(idCharla);
 		
-		JLabel lblNewLabel = new JLabel("Elimine su charla:\r\n");
-		lblNewLabel.setForeground(new Color(255, 51, 204));
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(132, 11, 171, 33);
-		contentPane.add(lblNewLabel);
+		ArrayList<Charla> listilla = us.getListaCharlas();
 		
-		nombreExp = new JTextField();
-		nombreExp.setBounds(140, 92, 132, 20);
-		contentPane.add(nombreExp);
-		nombreExp.setColumns(10);
+	    List l = new List();
+		l.setBounds(10, 10, 509, 121);
 		
-		JLabel lblNewLabel_1 = new JLabel("Ingrese el nombre del expositor de \r\nla charla que quiere eliminar \r\n");
-		lblNewLabel_1.setForeground(new Color(255, 51, 153));
-		lblNewLabel_1.setBounds(69, 55, 317, 26);
-		contentPane.add(lblNewLabel_1);
+		for(Charla charla : listilla) {
+	    	l.add("Id:" + charla.getIdCharla() + " Exp:" + charla.getExpositor().getNombre() + " Tema:" + charla.getExpositor().getTema() + " Fecha:" + charla.getFecha() + " Sala:" + charla.getIdSala());
+	    }
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombre :\r\n ");
-		lblNewLabel_2.setForeground(new Color(255, 51, 204));
-		lblNewLabel_2.setBounds(69, 95, 56, 14);
-		contentPane.add(lblNewLabel_2);
+		contentPane.setLayout(null);
 		
+		contentPane.add(l);
 		JButton btnNewButton = new JButton("Aceptar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				us.eliminarCharlaPorExpositor(nombreExp.getText(),us);
-				if (us.comprobarExpositor(nombreExp.getText(),us)) {
-				JOptionPane.showMessageDialog(null, "Se elimino satisfactoriamente la charla", "Comprobar",JOptionPane.OK_CANCEL_OPTION	);
-			}else {
-				JOptionPane.showMessageDialog(null, "No se encontro el expositor", "Comprobar",JOptionPane.ERROR_MESSAGE	);
-			}
+				String s = idCharla.getText();
+				us.eliminarCharla(s);
+				
+				
+				if (us.getSize()==0 && s!="") {
+					VentanaAviso.infoVentana("No tiene charlas guardadas", "Error");
+				}
+				if (s.equals("") && us.getSize()>0) {
+					VentanaAviso.infoVentana("Debe ingresar una id", "Error");
+				}
+				if(us.buscarCharla(s)==null && us.getSize()>0) {
+					VentanaAviso.infoVentana("Charla eliminada exitosamente", "Aviso");
+				}
+			setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(160, 201, 89, 23);
+		btnNewButton.setBounds(161, 300, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton button = new JButton("Cerrar\r\n");
@@ -71,7 +77,19 @@ public class VentanaEliminarCharla extends JFrame {
 		button.setForeground(Color.BLACK);
 		button.setFont(button.getFont().deriveFont(button.getFont().getStyle() | Font.BOLD | Font.ITALIC));
 		button.setBackground(Color.MAGENTA);
-		button.setBounds(35, 201, 89, 23);
+		button.setBounds(31, 300, 89, 23);
 		contentPane.add(button);
+		
+		JLabel lblIngreseElId = new JLabel("Ingrese el id de la charla de la cual quiere eliminar:\r\n");
+		lblIngreseElId.setBounds(10, 158, 328, 14);
+		contentPane.add(lblIngreseElId);
+		
+
+		
+		JLabel label = new JLabel("ID\r\n");
+		label.setForeground(Color.RED);
+		label.setFont(new Font("Comic Sans MS", Font.BOLD, 11));
+		label.setBounds(106, 214, 46, 14);
+		contentPane.add(label);
 	}
 }

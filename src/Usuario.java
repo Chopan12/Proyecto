@@ -1,20 +1,20 @@
 import java.util.ArrayList;
 public class Usuario extends Persona {
-	private String clave;
 	private ArrayList<Charla> charlasAsociadas; //charlas a las cuales el usuario asistirá
 	
 	public Usuario() {
 		super();
-		this.clave=null;
 		this.charlasAsociadas= new ArrayList<Charla>();
 	}
 	
 	public Usuario(String nombre, String rut, String clave) {
-		super(nombre, rut);
-		this.clave=clave;
+		super(nombre, rut, clave);
 		this.charlasAsociadas=new ArrayList<Charla>();
 	}
 	
+	public boolean esAdmin() {
+		return false;
+	}
 	/*public boolean recorrerAsientos(String idAsiento, String idSala) {//para recorrer los asientos y verificar si, por id, ya se encuentra en sus asientos asociados
 		if(charlasAsociadas.size()==0)return false;//no tiene nada dentro
 		Asiento asiento;
@@ -63,6 +63,17 @@ public class Usuario extends Persona {
 		charlasAsociadas.removeAll(charlasAsociadas);
 	}
 	
+	public Charla buscarCharla (String id) {
+	if(charlasAsociadas.size()==0)return null;
+		
+		for(int i=0;i<charlasAsociadas.size();i++){ //Busca una charla y la devuelve para que sea mostrada
+			Charla charla=charlasAsociadas.get(i);
+			if((charla.getIdCharla()).equals(id))return charla;	
+		}		
+		return null;
+		
+	}
+	
 
 		
 	public boolean validarRut (Usuario usuario) {
@@ -99,9 +110,11 @@ public class Usuario extends Persona {
 	
 	//Setters y getters
 	
-	public void setClave(String clave) { this.clave = clave;}
-	public String getClave() { return clave; }
-	public ArrayList<Charla> getListaCharlas(){return charlasAsociadas;}	
+
+	public ArrayList<Charla> getListaCharlas(){return charlasAsociadas;}
+	public int getSize(){return charlasAsociadas.size();}
+
+	
 }
 
 

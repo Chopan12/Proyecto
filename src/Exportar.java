@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Exportar {
 	
@@ -35,38 +36,37 @@ public class Exportar {
 				Sala sa = ch.getSalaAsignada();
 					sobreEscribe.write(sa.getIdSala());
 					sobreEscribe.write(";");
-					System.out.println(sa.getCapacTotal());
 					sobreEscribe.write(""+sa.getCapacTotal());
 					sobreEscribe.write(";\n");
 			}
 			sobreEscribe.close();
 	}
-	public void exportarCharlas (Congreso co,String ruta) throws FileNotFoundException, UnsupportedEncodingException { //Sobrecarga de metodos para reporte por archivo para usuario
-		ArrayList<Charla> listaCh = co.obtenerL();
-		PrintWriter sobreEscribe = new PrintWriter (ruta,"UTF-8"); //Para escribir en el archivo
-		
-			for (int x=0; x<listaCh.size(); x++) { //Proceso para escribir en el archivo
-					Charla ch = listaCh.get(x);
-					sobreEscribe.write(ch.getIdCharla()); 
-				
+		public void exportarCharlas (Congreso co,String ruta) throws FileNotFoundException, UnsupportedEncodingException { //Sobrecarga de metodos para reporte por archivo para usuario
+			ArrayList<Charla> listaCh = co.obtenerL();
+			PrintWriter sobreEscribe = new PrintWriter (ruta,"UTF-8"); //Para escribir en el archivo
+			
+				for (int x=0; x<listaCh.size(); x++) { //Proceso para escribir en el archivo
+						Charla ch = listaCh.get(x);
+						sobreEscribe.write(ch.getIdCharla()); 
 					
-					sobreEscribe.write("(Este elemento debe ingresar en la ventana);"); //Cada punto coma es para separar las palabras en los archivos para que este separado para el usuario
-					sobreEscribe.write(ch.getFecha());
-					sobreEscribe.write(";");
-					
-				Expositor ex = ch.getExpositor();
-					sobreEscribe.write(ex.getNombre());
-					sobreEscribe.write(";");
-					sobreEscribe.write(ex.getTema());
-					sobreEscribe.write(";");
-					
-				Sala sa = ch.getSalaAsignada();
-					sobreEscribe.write(sa.getIdSala());
-					sobreEscribe.write(";");
-					sobreEscribe.write("\n");
-			}
-			sobreEscribe.close();
-	}
+						
+						sobreEscribe.write("(Este elemento debe ingresar en la ventana);"); //Cada punto coma es para separar las palabras en los archivos para que este separado para el usuario
+						sobreEscribe.write(ch.getFecha());
+						sobreEscribe.write(";");
+						
+					Expositor ex = ch.getExpositor();
+						sobreEscribe.write(ex.getNombre());
+						sobreEscribe.write(";");
+						sobreEscribe.write(ex.getTema());
+						sobreEscribe.write(";");
+						
+					Sala sa = ch.getSalaAsignada();
+						sobreEscribe.write(sa.getIdSala());
+						sobreEscribe.write(";");
+						sobreEscribe.write("\n");
+				}
+				sobreEscribe.close();
+		}
 			
 		public void exportarAsiento (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
 			MapaAsientos mapaAsiento = co.obtenerMaAs();
@@ -74,8 +74,6 @@ public class Exportar {
 			for (String clave: mapaAsiento.obtenerClaves()) { //Obtener claves es una funcion keySet
 				Asiento as = mapaAsiento.obtenerAsiento(clave);//Se obtiene cada object del mapa con el for
 				sobreEscribe.write(as.getIdAsiento());
-				//System.out.println(as.getIdAsiento());
-				//System.out.println(as.getIdSala());
 				sobreEscribe.write(";");
 				sobreEscribe.write(as.getIdSala());
 				sobreEscribe.write(";");
@@ -85,10 +83,12 @@ public class Exportar {
 		}
 			
 		public void exportarUsuarios (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
-			MapaUsuarios mapaUs = co.obtenerMaUs();
+			Hashtable <String,Persona> mapaUs = co.obtenerMaUs();
+			
 			PrintWriter sobreEscribe = new PrintWriter ("usuarios.txt","UTF-8"); //Para escribir en el archivo
-			for(String clave: mapaUs.obtenerClaves()) {
-				Usuario us = mapaUs.buscarUsuario(clave);
+			for(String clave: mapaUs.keySet()) {
+				Persona us = mapaUs.get(clave);
+				
 				sobreEscribe.write(us.getNombre());
 				sobreEscribe.write(";");
 				sobreEscribe.write(us.getRut());

@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,23 +21,7 @@ public class VentanaEditarCharla extends JFrame {
 	private JTextField nombreExpositor;
 	private JButton btnConfirma;
 
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaEditarCharla frame = new VentanaEditarCharla(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-			}
-		});
-	}
-
-	
-	public VentanaEditarCharla(Congreso c) {
+	public VentanaEditarCharla(Charla s, Congreso c,Administrador us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -90,7 +74,7 @@ public class VentanaEditarCharla extends JFrame {
 		btnConfirma = new JButton("Confirmar");
 		btnConfirma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaAdmin2 ventanaAdmin = new VentanaAdmin2 (c);
+				VentanaAdmin2 ventanaAdmin = new VentanaAdmin2 (c,us);
 				setVisible(false);
 				ventanaAdmin.setVisible(true); 
 			}

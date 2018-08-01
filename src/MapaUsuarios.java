@@ -8,29 +8,33 @@ import java.util.Hashtable;
 import java.util.Set;
 
 public class MapaUsuarios implements Reporte {
-	private Hashtable<String, Usuario> usuarios;
+	private Hashtable<String, Persona> usuarios;
 	
 	public MapaUsuarios() {
-		usuarios=new Hashtable<String, Usuario>();
+		usuarios=new Hashtable<String, Persona>();
 	}
 	public void agregarUsuario(Usuario usuario) {
 		//if(usuarios.containsValue(usuario)) return;//se encontró el usuario, por lo que no se deberá agregar
 		String key=usuario.getRut();
 		usuarios.put(key, usuario);
 	}
+	public void agregarAdmin (Administrador admin) {
+		String key = admin.getRut();
+		usuarios.put(key, admin);
+	}
 	
-	public Usuario buscarUsuario(String rut) {
-		Usuario us = usuarios.get(rut);
+	public Persona buscarUsuario(String rut) {
+		Persona us = usuarios.get(rut);
 		return us;
 	}
 	public void modificarClaveUsuario(String clave, String nuevaClave) {
-		Usuario persona = usuarios.get(clave);
+		Persona persona = usuarios.get(clave);
 		persona.setClave(nuevaClave);
-		usuarios.put(nuevaClave, persona);
+		usuarios.put(persona.getRut(), persona);
 	}
-	public void eliminarUsuario(Usuario usuario) {//para eliminar los usuarios
+	public void eliminarUsuario(Persona usuario) {//para eliminar los usuarios
 		if(!usuarios.containsValue(usuario))return;//si no encuentra el valor, finaliza ya que el usuario no está ingresado
-		String key=usuario.getClave();
+		String key=(String) usuario.getClave();
 		usuarios.remove(key);
 	}
 	public boolean existeUsuario(Usuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
@@ -41,12 +45,12 @@ public class MapaUsuarios implements Reporte {
 		return usuarios.get(rut) != null;
 		
 	}
-	public Usuario obtenerUsuario(String idAsiento) {
+	public Persona obtenerUsuario(String idAsiento) {
 		return usuarios.get(idAsiento);
 	}
 	
 
-	public void importar () throws IOException {
+	public void importarUsuarios () throws IOException {
 		String linea;
 		BufferedReader br;
 		try {
@@ -59,7 +63,9 @@ public class MapaUsuarios implements Reporte {
 				us.setNombre(palabras[0]);
 				us.setRut(palabras[1]);
 				us.setClave(palabras[2]);
-				agregarUsuario(us);	
+				agregarUsuario(us);
+				
+				
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -67,7 +73,31 @@ public class MapaUsuarios implements Reporte {
 		
 	}
 	
+	public void importarAdministradores () throws IOException {
+		String linea;
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("admins.txt"));
+			while ((linea = br.readLine()) != null) {
+				String[] palabras = new String [3];
+				palabras = linea.split(";"); 
+				
+				Administrador ad = new Administrador ();
+				ad.setNombre(palabras[0]);
+				ad.setRut(palabras[1]);
+				ad.setClave(palabras[2]);
+				agregarAdmin(ad);
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
+	public Hashtable<String,Persona> obtenerM() {
+		return new Hashtable<String,Persona>(usuarios);
+	}
 	
 	
 
@@ -78,7 +108,16 @@ public class MapaUsuarios implements Reporte {
 	
 	
 	public String reportePantalla () {
-		return null;
+		int cont=0;
+		for(String clave: usuarios.keySet()) {
+			
+			Persona us = usuarios.get(clave);
+			
+			if (!us.esAdmin()) {
+			cont++;
+			}
+		}
+		return Integer.toString(cont);
 	}
 	
 	public void reporteArchivo (String r) throws IOException {
@@ -86,13 +125,17 @@ public class MapaUsuarios implements Reporte {
 		File file = new File(r); //Se abre el archivo 
         
         if(!Desktop.isDesktopSupported()){ //Ver si la plataforma soporta 	
-            System.out.println("El escritorio no es soportado por la plataforma");
+            VentanaAviso.infoVentana("El escritorio no es soportado por la plataforma", "Aviso");
             return;
         }
         
         Desktop desktop = Desktop.getDesktop();
         if(file.exists()) desktop.open(file);
         	
+	}
+	
+	public int size() {
+		return usuarios.size();
 	}
 	
 }

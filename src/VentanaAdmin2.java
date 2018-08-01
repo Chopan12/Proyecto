@@ -1,7 +1,3 @@
-
-
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -21,24 +17,7 @@ public class VentanaAdmin2 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaAdmin2 frame = new VentanaAdmin2(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public VentanaAdmin2(Congreso c) {
+	public VentanaAdmin2(Congreso c,Administrador us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,14 +29,14 @@ public class VentanaAdmin2 extends JFrame {
 		JButton btnCrearCharla = new JButton("Crear Charla");
 		btnCrearCharla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCrearCharla vntCrCh = new VentanaCrearCharla (c);
+				VentanaCrearCharla vntCrCh = new VentanaCrearCharla (c,us);
 				setVisible (false);
 				vntCrCh.setVisible(true);
 	
 			}
 		});
 		btnCrearCharla.setBackground(Color.WHITE);
-		btnCrearCharla.setBounds(10, 84, 127, 23);
+		btnCrearCharla.setBounds(10, 59, 140, 23);
 		contentPane.add(btnCrearCharla);
 		
 		JLabel label = new JLabel("Escoja una opcion\r\n");
@@ -81,34 +60,89 @@ public class VentanaAdmin2 extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(147, 192, 127, 23);
+		btnNewButton.setBounds(147, 227, 140, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Editar Charla");
 		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaOpcionesEdicion v = new VentanaOpcionesEdicion (c);
+				VentanaIdentificarCharla v = new VentanaIdentificarCharla (c,us);
 				setVisible(false);
 				v.setVisible(true);	
 			}
 		});
-		btnNewButton_1.setBounds(297, 84, 127, 23);
+		btnNewButton_1.setBounds(284, 59, 140, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Mostrar Usuarios");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MapaUsuarios mapUs = c.obtenerMaUs();
+				MapaUsuarios m = new MapaUsuarios();
 				try {
-					mapUs.reporteArchivo("usuarios.txt");
+					m.reporteArchivo("usuarios.txt");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		btnNewButton_2.setBackground(Color.WHITE);
-		btnNewButton_2.setBounds(147, 129, 127, 23);
+		btnNewButton_2.setBounds(10, 129, 140, 23);
 		contentPane.add(btnNewButton_2);
+		
+		JButton btnMostrarCharlas = new JButton("Mostrar Charlas");
+		btnMostrarCharlas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListaCharlas l = new ListaCharlas();
+				try {
+					l.reporteArchivo("charlas.txt");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnMostrarCharlas.setBackground(Color.WHITE);
+		btnMostrarCharlas.setBounds(10, 171, 140, 23);
+		contentPane.add(btnMostrarCharlas);
+		
+		JLabel lblArchivol = new JLabel("Mostrar por archivo :\r\n");
+		lblArchivol.setBounds(10, 93, 157, 14);
+		contentPane.add(lblArchivol);
+		
+		JButton button = new JButton("Mostrar Usuarios");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaReporteUno v = new VentanaReporteUno (c,us);
+				setVisible(false);
+				v.setVisible(true);
+			}
+		});
+		button.setBackground(Color.WHITE);
+		button.setBounds(284, 129, 140, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("Mostrar Charlas");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaReporteDos ve = new VentanaReporteDos (c,us);
+				setVisible(false);
+				ve.setVisible(true);
+			}
+		});
+		button_1.setBackground(Color.WHITE);
+		button_1.setBounds(284, 171, 140, 23);
+		contentPane.add(button_1);
+		
+		JLabel lblMostrarPorPantalla = new JLabel("Mostrar por pantalla :");
+		lblMostrarPorPantalla.setBounds(294, 93, 118, 14);
+		contentPane.add(lblMostrarPorPantalla);
+		
+		JLabel lblCantidad = new JLabel("(Cantidad)");
+		lblCantidad.setBounds(322, 110, 69, 14);
+		contentPane.add(lblCantidad);
+		
+		JLabel lbldatos = new JLabel("(Datos)");
+		lbldatos.setBounds(37, 110, 69, 14);
+		contentPane.add(lbldatos);
 	}
 }

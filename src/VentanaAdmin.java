@@ -1,12 +1,10 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
-	import javax.swing.JButton;
+import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,29 +14,9 @@ public class VentanaAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField textField_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public void VentanaAdminA () {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaAdmin frame = new VentanaAdmin(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	private JTextField ingRut;
+	private JPasswordField ingClave;
+	
 	public VentanaAdmin(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -70,38 +48,57 @@ public class VentanaAdmin extends JFrame {
 		btnNewButton.setBounds(145, 215, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JLabel label = new JLabel("Rut :\r\n\r\n\r\n");
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(88, 89, 46, 14);
-		contentPane.add(label);
+		JLabel Rut = new JLabel("Rut :\r\n\r\n\r\n");
+		Rut.setFont(new Font("Tahoma", Font.BOLD, 11));
+		Rut.setBounds(88, 89, 46, 14);
+		contentPane.add(Rut);
 		
-		JLabel label_1 = new JLabel("Clave :\r\n");
-		label_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		label_1.setBounds(88, 144, 46, 14);
-		contentPane.add(label_1);
+		JLabel Clave = new JLabel("Clave :\r\n");
+		Clave.setFont(new Font("Dialog", Font.BOLD, 12));
+		Clave.setBounds(88, 144, 46, 14);
+		contentPane.add(Clave);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(145, 86, 144, 20);
-		contentPane.add(textField);
-		
-		textField_1 = new JPasswordField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(145, 141, 144, 20);
-		contentPane.add(textField_1);
+		ingRut = new JTextField();
+		ingRut.setColumns(10);
+		ingRut.setBounds(145, 86, 144, 20);
+		contentPane.add(ingRut);
 		
 		JButton button = new JButton("Continuar\r\n");
 		button.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdmin2 ventanaAdmin2 = new VentanaAdmin2 (c);
-				setVisible(false);
-				ventanaAdmin2.setVisible(true);
-			}
+				String rut,clave;
+				rut = ingRut.getText();
+				clave = ingClave.getText();
+				Administrador ad = c.obtenerAdmin(rut);
+				
+				if (ad!=null) {
+					
+					if (ad.getClave().equals(clave)) {
+						VentanaAdmin2 ventanaAd2 = new VentanaAdmin2 (c, ad);
+						setVisible (false);
+						ventanaAd2.setVisible(true);
+					}else {
+						setVisible (false);
+					}
+				}else {
+					VentanaAviso.infoVentana("Administrador incorrecto, vuelva a intentarlo","Error");
+					setVisible(false);
+					VentanaAdmin v = new VentanaAdmin (c);
+					v.setVisible(true);
+				}
+			
+			 }
 		});
 		button.setForeground(Color.BLACK);
 		button.setFont(button.getFont().deriveFont(button.getFont().getStyle() | Font.BOLD | Font.ITALIC));
 		button.setBackground(Color.RED);
 		button.setBounds(255, 215, 117, 23);
 		contentPane.add(button);
-	}
+		
+		ingClave = new JPasswordField();
+		ingClave.setBounds(145, 144, 144, 18);
+		contentPane.add(ingClave);
+	
+}
 }

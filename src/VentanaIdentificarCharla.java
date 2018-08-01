@@ -18,24 +18,7 @@ public class VentanaIdentificarCharla extends JFrame {
 	private JPanel contentPane;
 	private JTextField IDCharla;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaIdentificarCharla frame = new VentanaIdentificarCharla(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public VentanaIdentificarCharla(Congreso c) {
+	public VentanaIdentificarCharla(Congreso c,Administrador us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,20 +32,28 @@ public class VentanaIdentificarCharla extends JFrame {
 		lblIngreseIdDe.setBounds(128, 11, 153, 14);
 		contentPane.add(lblIngreseIdDe);
 		
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaOpcionesEdicion ventanaOpcionesEdicion = new VentanaOpcionesEdicion(c.obtenerCharlaid(IDCharla.getText()),c,us);
+				setVisible(false);
+				ventanaOpcionesEdicion.setVisible(true);	
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
+		
 		IDCharla = new JTextField();
 		IDCharla.setBounds(159, 49, 86, 20);
 		contentPane.add(IDCharla);
 		IDCharla.setColumns(10);
-		
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				VentanaOpcionesEdicion ventanaOpcionesEdicion = new VentanaOpcionesEdicion(c);
-				setVisible(false);
-				ventanaOpcionesEdicion.setVisible(true);
-				
-			}
-		});
 		btnConfirmar.setBounds(159, 80, 89, 23);
 		contentPane.add(btnConfirmar);
 	}

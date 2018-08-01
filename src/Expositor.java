@@ -8,7 +8,7 @@ public class Expositor extends Persona{
 	}
 	
 	public Expositor(String nombre, String rut, String tema) {
-		super(nombre, rut);
+		super();
 		this.tema=tema;
 	}
 	
@@ -17,7 +17,12 @@ public class Expositor extends Persona{
 		super(nomExpositor);
 		tema=null;
 	}
+	
 */
+	
+	public boolean esAdmin() {
+		return false;
+	}
 	public void setTema(String tema) { this.tema=tema; }
 	public String getTema() { return tema; }
 	

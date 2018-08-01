@@ -55,7 +55,6 @@ public class ListaCharlas implements Reporte{
 			
 			Sala sala = charla.getSalaAsignada(); //se obtiene la sala asignada que tiene la charla
 			Asiento asiento= sala.obtenerAsiento(idAsiento); //se obtiene el asiento que se está buscando con su id
-			System.out.println(idAsiento);
 			id=asiento.getIdAsiento(); //obtenemos el id que tiene el asiento y confirmamos si es el mismo que está entrando
 			
 			if(sala.recorrerAsientos(idAsiento)) {
@@ -70,21 +69,8 @@ public class ListaCharlas implements Reporte{
 		return false;//no se encontró
 	}
 	
-
-	 
-	/*public void agregarCharla(String idCharla, int duracion, Expositor expositor, Sala sala, String fecha){ // Agrega una charla a la lista de charlas
-		if(idCharla.equals(" "))return;
-		if(expositor.equals(null))return;
-		if(sala.equals(null))return;
-		if(fecha.equals(null))return;
-		if(recorrerCharlas(idCharla))return;//Se verifica si no hay parametros mal ingresados o si esta la charla en la lista, para luego agregarla
-		Charla charla = new Charla(idCharla,duracion,expositor,sala.getIdSala(), fecha, sala.getCapacTotal());
-		listaCharlas.add(charla); //sala añadida correctamente :D
-	}*/
-	
 	public void agregarCharla(Charla charla) {
 		String id=charla.getIdCharla();//guardaremos el id para saber si existe
-		System.out.println(id);
 		if(obtenerCharla(id)!=null) {			
 			return;//finaliza, ya que existe la sala con su id guardado
 		}
@@ -152,14 +138,7 @@ public class ListaCharlas implements Reporte{
 				   							//trabajo de acomodar las filas
 	
 	}
-/*	public void eliminarCharla (String idCharla) {
-		Charla charla = new Charla();
-		for(int i=0; i<listaCharlas.size(); i++) {
-			charla=listaCharlas.get(i);
-			if(charla.getIdCharla().equals(idCharla)) listaCharlas.remove(charla);
-		}
-	}
-*/	
+
 	private int indexArray(String idCharla) {//se utilizará para ver el indice de donde está ubiada la charla
 		if(recorrerCharlas(idCharla)) {//se verifica que exista la charla primero
 			Charla charla;
@@ -179,23 +158,23 @@ public class ListaCharlas implements Reporte{
 		BufferedReader br;
 		String linea;
 		try {
-			br = new BufferedReader(new FileReader("charlas.txt"));
-			while ((linea = br.readLine()) != null) {
-				String[] palabras = new String [10];
-				palabras = linea.split(";");  
+			br = new BufferedReader(new FileReader("charlas.txt")); //Lector de archivos 
+			while ((linea = br.readLine()) != null) { //Se lee linea a linea
+				String[] palabras = new String [10]; //Se crea un vector para almacenar los datos
+				palabras = linea.split(";");  //Los datos en el archivo estan separados por punto y coma 
 					
-				String fecha = palabras[2]+"/"+palabras[3]+"/"+palabras[4]; 
+				String fecha = palabras[2]+"/"+palabras[3]+"/"+palabras[4]; //Se crea la fecha 
 
-				Expositor ex = new Expositor (palabras[5],palabras[6],palabras[7]);
-				//System.out.println("SALA : " + ch.getSalaAsignada().getIdSala());
-				Charla charlita = new Charla (palabras[0], Integer.parseInt(palabras[1]), ex, palabras[8], fecha, Integer.parseInt(palabras[9]));
-				
-				System.out.println(charlita.getIdSala() + "Esto viene de aca");
-				agregarCharla(charlita);
+				Expositor ex = new Expositor (); //Se crea el expositor 
+				ex.setNombre(palabras[5]);
+				ex.setRut(palabras[6]);
+				ex.setTema(palabras[7]);
+				Charla charlita = new Charla (palabras[0], Integer.parseInt(palabras[1]), ex, palabras[8], fecha, Integer.parseInt(palabras[9])); //Se crea la charla con todos los datos disponibles
+				agregarCharla(charlita); //Se agrega la charla a la lista
 			}
 		
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			e.printStackTrace(); //Excepcion por si no se llega a encontrar el archivo
 	}
 	}
 	
@@ -205,7 +184,6 @@ public class ListaCharlas implements Reporte{
 		return listaCharlas.size();
 	}
 	
-	//TODO: implementar metodos con las interfaces, falta 1
 	
 	public void reporteArchivo (String ruta,Congreso c) throws IOException {
 		
@@ -214,7 +192,6 @@ public class ListaCharlas implements Reporte{
 		File file = new File(ruta); //Se abre el archivo 
         
         if(!Desktop.isDesktopSupported()){ //Ver si la plataforma soporta 	
-            System.out.println("El escritorio no es soportado por la plataforma");
             return;
         }
         
@@ -226,50 +203,28 @@ public class ListaCharlas implements Reporte{
 	}
 	
 	public String reportePantalla () {
-		return null;
+		return Integer.toString(listaCharlas.size());
 	}
 
-	@Override
-	public void reporteArchivo(String rutaArchivo) {
-		// TODO Auto-generated method stub
+	public void reporteArchivo(String rutaArchivo) throws IOException {
+			
+			File file = new File(rutaArchivo); //Se abre el archivo 
+	        
+	        if(!Desktop.isDesktopSupported()){ //Ver si la plataforma soporta 	
+	            VentanaAviso.infoVentana("El escritorio no es soportado por la plataforma", "Aviso");
+	            return;
+	        }
+	        
+	        Desktop desktop = Desktop.getDesktop(); //Se abre el archivo 
+	        if(file.exists()) desktop.open(file);
+	        	
+		}
 		
-	}
+		
+	
 
 	public ArrayList<Charla> obtenerL() {
 		return new ArrayList<Charla>(listaCharlas); //es una copia de la lista c:
 	}
 
-
-/*	public Charla buscarCharla(Date hora) {//buscará la charla más próxima en base a la fecha que se busca, y la sala en la cual se está buscando
-	if(hora.equals(null))return null;
-	Charla charla;
-	Date fecha, fechaAux;
-	for(int i=0; i<listaCharlas.size(); i++) {
-		charla=listaCharlas.get(i);
-		fecha=charla.getFecha();
-		if(hora.after(hora))
-	}
-	return null;
-}
-	private int obtenerIndice (String idCharla) { //Obtiene el indice para poder usar en la funcion eliminar, se crea privado porque solo se utilizara el metodo en esta clase
-	if(listaCharlas.size()==0)return -1;
-	for(int i=0;i<listaCharlas.size();i++){ //Solamente para obtener indice
-		if((listaCharlas.get(i)).getIdCharla().equals(idCharla))return i;
-	}		
-	return 0;
-}
-
-	public void modificarCharla(String idCharla, String fecha) {
-		if(fecha.equals(null))return;//si no se ingresa una fecha válida
-		if(recorrerCharlas(idCharla)) {
-			Charla charla=listaCharlas.get(indexArray(idCharla));//se obtiene la charla que se debe modificar
-			//String fechaAux=charla.getFecha();//se almacena la fecha para comparar si la fecha ingresada es menor a la actual
-			//if(fechaAux.after(fecha))return;//Consideraremos que no se puede adelantar una charla, solo atrasarla (Problemas por date)*Cambiar despues*
-			//if(fecha.before(fechaAux))return;//es lo mismo que arriba, solo que se ve de otra forma
-			if(recorrerCharlas(idCharla)) {
-				if(indexArray(idCharla)!=-1)listaCharlas.get(indexArray(idCharla)).setFecha(fecha); //se cambia la fecha a una posterior
-			}
-		}
-	}
-	*/
 }

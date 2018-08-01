@@ -17,25 +17,7 @@ public class VentanaIngresarDuracion extends JFrame {
 	private JPanel contentPane;
 	private JTextField Duracion;
 
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaIngresarDuracion frame = new VentanaIngresarDuracion(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public VentanaIngresarDuracion(Congreso c) {
+	public VentanaIngresarDuracion(Charla s,Congreso c,Administrador us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -57,7 +39,9 @@ public class VentanaIngresarDuracion extends JFrame {
 		JButton btnContinuar = new JButton("Continuar");
 		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaOpcionesEdicion ventanaOpcionesEdicion = new VentanaOpcionesEdicion (c);
+				int i = Integer.parseInt(Duracion.getText());
+				s.setDuracion(i);
+				VentanaOpcionesEdicion ventanaOpcionesEdicion = new VentanaOpcionesEdicion (s,c,us);
 				setVisible(false);
 				ventanaOpcionesEdicion.setVisible(true); 
 			}

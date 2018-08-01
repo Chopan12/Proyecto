@@ -1,17 +1,18 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class Registro extends JFrame  {
+public class VentanaRegistro extends JFrame  {
 
 	/**
 	 * 
@@ -26,7 +27,7 @@ public class Registro extends JFrame  {
 			public void run() {
 				try {
 					Congreso c = new Congreso ();
-					Registro frame = new Registro(c);
+					VentanaRegistro frame = new VentanaRegistro(c);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +36,7 @@ public class Registro extends JFrame  {
 		});
 	}
 
-	public Registro(Congreso c) {
+	public VentanaRegistro(Congreso c) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -95,7 +96,7 @@ public class Registro extends JFrame  {
 				String rut = Rut.getText(); //Se obtiene el rut
 				
 				Usuario nuevUs = new Usuario (nombre,rut,clave);
-				MapaUsuarios m = c.obtenerMaUs(); 
+				MapaUsuarios m = c.obtenerMapUs(); 
 				m.agregarUsuario(nuevUs);
 				
 				setVisible(false);

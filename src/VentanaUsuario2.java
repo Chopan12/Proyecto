@@ -1,5 +1,3 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,27 +13,6 @@ public class VentanaUsuario2 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public void VentanaUsuario2A () {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					Usuario us = new Usuario();
-					VentanaUsuario2 frame = new VentanaUsuario2(c, us);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaUsuario2(Congreso c, Usuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -92,7 +69,9 @@ public class VentanaUsuario2 extends JFrame {
 		JButton btnVerCharlas = new JButton("Ver charlas propias\r\n\r\n");
 		btnVerCharlas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Reporte de pene
+				VentanaVerCharlas v = new VentanaVerCharlas (c,us);
+				setVisible(false);
+				v.setVisible(true);
 			}
 		});
 		btnVerCharlas.setForeground(Color.GREEN);
@@ -104,6 +83,7 @@ public class VentanaUsuario2 extends JFrame {
 		btnEliminarTodo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				us.eliminarCharlas();
+				VentanaAviso.infoVentana("Se elimino todo correctamente", "Aviso");
 			}
 		});
 		btnEliminarTodo.setForeground(Color.RED);

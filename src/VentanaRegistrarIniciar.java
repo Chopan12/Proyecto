@@ -44,7 +44,7 @@ public class VentanaRegistrarIniciar extends JFrame {
 		JButton btnNewButton = new JButton("Registrarse");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Registro r = new Registro (c);
+				VentanaRegistro r = new VentanaRegistro (c);
 				setVisible(false);
 				r.setVisible(true);
 			}

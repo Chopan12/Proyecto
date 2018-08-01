@@ -1,6 +1,4 @@
-	import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+	import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -15,23 +13,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaOpcionDeseaAgregarCharla frame = new VentanaOpcionDeseaAgregarCharla(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	/**
-	 * Create the frame.
-	 */
-	public VentanaOpcionDeseaAgregarCharla(Congreso c) {
+	public VentanaOpcionDeseaAgregarCharla(Congreso c,Administrador us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -48,7 +30,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 		JButton btnNewButton = new JButton("SI\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaCrearCharla vntCrCh = new VentanaCrearCharla(c);
+				VentanaCrearCharla vntCrCh = new VentanaCrearCharla(c,us);
 				setVisible (false);
 				vntCrCh.setVisible(true);
 			}
@@ -61,7 +43,7 @@ public class VentanaOpcionDeseaAgregarCharla extends JFrame {
 		JButton btnNewButton_1 = new JButton("NO\r\n");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaAdmin2 vntAd = new VentanaAdmin2 (c);
+				VentanaAdmin2 vntAd = new VentanaAdmin2 (c,us);
 				setVisible(false);
 				vntAd.setVisible(true);
 			}

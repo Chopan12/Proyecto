@@ -1,5 +1,3 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +7,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -29,26 +26,9 @@ public class VentanaCrearCharla extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {   //Esta ventana es para crear una charla y se agrega a la lista
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaCrearCharla frame = new VentanaCrearCharla (c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 * @throws ParseException 
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public VentanaCrearCharla(Congreso c) {
+	public VentanaCrearCharla(Congreso c,Administrador us) {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 590, 412);
@@ -81,7 +61,7 @@ public class VentanaCrearCharla extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VentanaAdmin2 vntAd2 = new VentanaAdmin2 (c);
+				VentanaAdmin2 vntAd2 = new VentanaAdmin2 (c,us);
 				setVisible(false);
 				vntAd2.setVisible(true);
 			}
@@ -225,7 +205,7 @@ public class VentanaCrearCharla extends JFrame {
 		    
 		    	c.agregarCharla(charlita); 
 		    	
-				VentanaOpcionDeseaAgregarCharla ventOp = new VentanaOpcionDeseaAgregarCharla (c); 
+				VentanaOpcionDeseaAgregarCharla ventOp = new VentanaOpcionDeseaAgregarCharla (c,us); 
 				setVisible(false);
 				ventOp.setVisible(true);
 			}

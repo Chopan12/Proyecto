@@ -1,5 +1,3 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,27 +17,7 @@ public class VentanaUsuario extends JFrame {
 	private JTextField ingresarRut;
 	private JPasswordField ingresarClave;
 
-	/**
-	 * Launch the application.
-	 */
-	public void VentanaUsuarioA () {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Congreso c = new Congreso ();
-					VentanaUsuario frame = new VentanaUsuario(c);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public VentanaUsuario(Congreso c) {
+ VentanaUsuario(Congreso c) {
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -98,9 +76,10 @@ public class VentanaUsuario extends JFrame {
 				String rut,clave;
 				rut = ingresarRut.getText();
 				clave = ingresarClave.getText();
-				MapaUsuarios m = c.obtenerMaUs();
-				if (m.existeUsuario(rut)) {
-					Usuario us = m.buscarUsuario(rut);
+				
+				Usuario us = c.obtenerUsuario (rut); 
+				
+				if (us!=null) {	
 					if (us.getClave().equals(clave)) {
 						VentanaUsuario2 ventanaUs2 = new VentanaUsuario2 (c, us);
 						setVisible (false);
@@ -109,7 +88,10 @@ public class VentanaUsuario extends JFrame {
 						setVisible (false);
 					}
 				}else {
+					VentanaAviso.infoVentana("Usuario Incorrecto","Error");
 					setVisible(false);
+					VentanaUsuario v = new VentanaUsuario (c);
+					v.setVisible(true);
 				}
 				
 			}

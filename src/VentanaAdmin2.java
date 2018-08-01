@@ -144,5 +144,16 @@ public class VentanaAdmin2 extends JFrame {
 		JLabel lbldatos = new JLabel("(Datos)");
 		lbldatos.setBounds(37, 110, 69, 14);
 		contentPane.add(lbldatos);
+		
+		JButton btnFrecuenciaCharlas = new JButton("Frecuencia Charlas");
+		btnFrecuenciaCharlas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentanaMostrarFrecuencia v = new VentanaMostrarFrecuencia(c);
+				setVisible(false);
+				v.setVisible(true);
+			}
+		});
+		btnFrecuenciaCharlas.setBounds(160, 193, 114, 23);
+		contentPane.add(btnFrecuenciaCharlas);
 	}
 }

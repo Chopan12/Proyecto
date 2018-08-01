@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class FuncionesPropias {
 	/*Funciones Propias*/
@@ -29,7 +30,28 @@ public class FuncionesPropias {
 		}
 		return contCharlasYUsuarios;
 	}
+
+
+	public double obtenerFrecuenciaRelativa(Congreso c,String idCharla) {
+		
+		int cont=0;
+		ListaCharlas l = new ListaCharlas(); 
+		Hashtable <String,Persona> usuarios = c.obtenerMaUs();
+		
+			Charla aux = l.buscarCharla(idCharla);
+	
+			for(String clave: usuarios.keySet()) {
+	        
+	        Persona us = usuarios.get(clave);
+	
+	        if (!us.esAdmin()) {
+	        	cont++;
+	        }
+		}
+			return ((double)cont)/((double)aux.getSalaAsignada().getCapacTotal());
+	}
 }
+
 
 
 

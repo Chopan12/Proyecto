@@ -17,7 +17,7 @@ public class VentanaIngresarDuracion extends JFrame {
 	private JPanel contentPane;
 	private JTextField Duracion;
 
-	public VentanaIngresarDuracion(Charla s,Congreso c,Administrador us) {
+	public VentanaIngresarDuracion(Charla s,Congreso c, CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -77,7 +77,7 @@ public class VentanaUsuario extends JFrame {
 				rut = ingresarRut.getText();
 				clave = ingresarClave.getText();
 				
-				Usuario us = c.obtenerUsuario (rut); 
+				CuentaUsuario us = c.obtenerUsuario (rut); 
 				
 				if (us!=null) {	
 					if (us.getClave().equals(clave)) {

@@ -17,7 +17,7 @@ public class VentanaAdmin2 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public VentanaAdmin2(Congreso c,Administrador us) {
+	public VentanaAdmin2(Congreso c, CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

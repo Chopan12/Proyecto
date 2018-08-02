@@ -18,7 +18,7 @@ public class VentanaAgrChr extends JFrame {
 	private JTextField idCh;
 
 
-	public VentanaAgrChr(Congreso c, Usuario us) {
+	public VentanaAgrChr(Congreso c,CuentaUsuario us) {
 		
 		
         

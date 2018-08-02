@@ -1,4 +1,5 @@
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -95,7 +96,7 @@ public class VentanaRegistro extends JFrame  {
 				String clave = Clave.getText();
 				String rut = Rut.getText(); //Se obtiene el rut
 				
-				Usuario nuevUs = new Usuario (nombre,rut,clave);
+				CuentaUsuario nuevUs = new UsuarioDirector( new UsuarioBuilder() ).haceUsuario(nombre, clave, rut).getCuentaUsuario();
 				MapaUsuarios m = c.obtenerMapUs(); 
 				m.agregarUsuario(nuevUs);
 				

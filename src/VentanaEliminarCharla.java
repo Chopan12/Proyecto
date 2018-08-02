@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -21,7 +22,7 @@ public class VentanaEliminarCharla extends JFrame {
 	private JTextField idCharla;
 
 
-	public VentanaEliminarCharla(Usuario us) {
+	public VentanaEliminarCharla(CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 545, 373);
 		contentPane = new JPanel();

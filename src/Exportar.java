@@ -83,11 +83,9 @@ public class Exportar {
 		}
 			
 		public void exportarUsuarios (Congreso co) throws FileNotFoundException, UnsupportedEncodingException {
-			Hashtable <String,Persona> mapaUs = co.obtenerMaUs();
 			
 			PrintWriter sobreEscribe = new PrintWriter ("usuarios.txt","UTF-8"); //Para escribir en el archivo
-			for(String clave: mapaUs.keySet()) {
-				Persona us = mapaUs.get(clave);
+			for(CuentaUsuario us: co.listausuarios()) {
 				
 				sobreEscribe.write(us.getNombre());
 				sobreEscribe.write(";");

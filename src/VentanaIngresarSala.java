@@ -18,7 +18,7 @@ public class VentanaIngresarSala extends JFrame {
 	private JTextField NuevaSala;
 	private JTextField NuevaCapacidad;
 
-	public VentanaIngresarSala(Charla s,Congreso c,Administrador us) {
+	public VentanaIngresarSala(Charla s,Congreso c,CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

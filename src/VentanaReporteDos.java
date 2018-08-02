@@ -15,7 +15,7 @@ public class VentanaReporteDos extends JFrame {
 	private JPanel contentPane;
 
 
-	public VentanaReporteDos (Congreso c, Administrador ad) {
+	public VentanaReporteDos (Congreso c, CuentaUsuario ad) {
 		
 		
         

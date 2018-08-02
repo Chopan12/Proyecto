@@ -3,6 +3,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 //import java.awt.FlowLayout;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ public class VentanaEditarExpositor extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public VentanaEditarExpositor(Charla s, Congreso c,Administrador us) {
+	public VentanaEditarExpositor(Charla s, Congreso c,CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -23,7 +23,7 @@ public class VentanaEditarExpositorRut extends JFrame {
 	private JTextField NuevoRut;
 	private JButton btnVolver;
 
-	public VentanaEditarExpositorRut(Charla s, Congreso c,Administrador us) {
+	public VentanaEditarExpositorRut(Charla s, Congreso c,CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

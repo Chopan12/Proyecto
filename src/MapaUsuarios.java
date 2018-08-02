@@ -4,40 +4,41 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 
 public class MapaUsuarios implements Reporte {
-	private Hashtable<String, Persona> usuarios;
+	private Hashtable<String, CuentaUsuario> usuarios;
 	
 	public MapaUsuarios() {
-		usuarios=new Hashtable<String, Persona>();
+		usuarios=new Hashtable<String, CuentaUsuario>();
 	}
-	public void agregarUsuario(Usuario usuario) {
+	public void agregarUsuario(CuentaUsuario usuario) {
 		//if(usuarios.containsValue(usuario)) return;//se encontró el usuario, por lo que no se deberá agregar
 		String key=usuario.getRut();
 		usuarios.put(key, usuario);
 	}
-	public void agregarAdmin (Administrador admin) {
+	public void agregarAdmin (CuentaUsuario admin) {
 		String key = admin.getRut();
 		usuarios.put(key, admin);
 	}
 	
-	public Persona buscarUsuario(String rut) {
-		Persona us = usuarios.get(rut);
+	public CuentaUsuario buscarUsuario(String rut) {
+		CuentaUsuario us = usuarios.get(rut);
 		return us;
 	}
 	public void modificarClaveUsuario(String clave, String nuevaClave) {
-		Persona persona = usuarios.get(clave);
+		CuentaUsuario persona = usuarios.get(clave);
 		persona.setClave(nuevaClave);
 		usuarios.put(persona.getRut(), persona);
 	}
-	public void eliminarUsuario(Persona usuario) {//para eliminar los usuarios
+	public void eliminarUsuario(CuentaUsuario usuario) {//para eliminar los usuarios
 		if(!usuarios.containsValue(usuario))return;//si no encuentra el valor, finaliza ya que el usuario no está ingresado
 		String key=(String) usuario.getClave();
 		usuarios.remove(key);
 	}
-	public boolean existeUsuario(Usuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
+	public boolean existeUsuario(CuentaUsuario usuario) { //para confirmar si el mapa contiene el usuario que se ingresa
 		if(usuarios.containsValue(usuario))return true;
 		return false;
 	}
@@ -45,7 +46,7 @@ public class MapaUsuarios implements Reporte {
 		return usuarios.get(rut) != null;
 		
 	}
-	public Persona obtenerUsuario(String idAsiento) {
+	public CuentaUsuario obtenerUsuario(String idAsiento) {
 		return usuarios.get(idAsiento);
 	}
 	
@@ -59,7 +60,7 @@ public class MapaUsuarios implements Reporte {
 				String[] palabras = new String [3];
 				palabras = linea.split(";"); 
 				
-				Usuario us = new Usuario ();
+				CuentaUsuario us = new UsuarioDirector( new UsuarioBuilder() ).haceUsuario(palabras[0], palabras[1], palabras[2]).getCuentaUsuario();
 				us.setNombre(palabras[0]);
 				us.setRut(palabras[1]);
 				us.setClave(palabras[2]);
@@ -82,10 +83,8 @@ public class MapaUsuarios implements Reporte {
 				String[] palabras = new String [3];
 				palabras = linea.split(";"); 
 				
-				Administrador ad = new Administrador ();
-				ad.setNombre(palabras[0]);
-				ad.setRut(palabras[1]);
-				ad.setClave(palabras[2]);
+				CuentaUsuario ad = new UsuarioDirector ( new AdminBuilder() ).haceUsuario(palabras[0], palabras[1], palabras[2]).getCuentaUsuario();
+				System.out.println(ad.getNombre() + " " + ad.getRut() + " " + ad.getClave());
 				agregarAdmin(ad);
 				
 			}
@@ -95,9 +94,7 @@ public class MapaUsuarios implements Reporte {
 		
 	}
 	
-	public Hashtable<String,Persona> obtenerM() {
-		return new Hashtable<String,Persona>(usuarios);
-	}
+
 	
 	
 
@@ -111,9 +108,9 @@ public class MapaUsuarios implements Reporte {
 		int cont=0;
 		for(String clave: usuarios.keySet()) {
 			
-			Persona us = usuarios.get(clave);
+			CuentaUsuario us = usuarios.get(clave);
 			
-			if (!us.esAdmin()) {
+			if (!us.getEsAdmin()) {
 			cont++;
 			}
 		}
@@ -136,6 +133,9 @@ public class MapaUsuarios implements Reporte {
 	
 	public int size() {
 		return usuarios.size();
+	}
+	public ArrayList<CuentaUsuario> listaUsuarios() {
+		return new ArrayList<CuentaUsuario>(usuarios.values());
 	}
 	
 }

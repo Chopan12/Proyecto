@@ -70,9 +70,9 @@ public class VentanaAdmin extends JFrame {
 				String rut,clave;
 				rut = ingRut.getText();
 				clave = ingClave.getText();
-				Administrador ad = c.obtenerAdmin(rut);
+				CuentaUsuario ad = c.obtenerUsuario(rut);
 				
-				if (ad!=null) {
+				if (ad!=null && ad.getEsAdmin()) {
 					
 					if (ad.getClave().equals(clave)) {
 						VentanaAdmin2 ventanaAd2 = new VentanaAdmin2 (c, ad);

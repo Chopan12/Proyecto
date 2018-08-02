@@ -19,7 +19,7 @@ public class VentanaEditarExpositorTema extends JFrame {
 	private JTextField NuevoTema;
 	private JButton btnVolver;
 
-	public VentanaEditarExpositorTema(Charla s, Congreso c,Administrador us) {
+	public VentanaEditarExpositorTema(Charla s, Congreso c,CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

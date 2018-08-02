@@ -25,11 +25,11 @@ public class Congreso {
 	}
 		
 	
-	public void agregarUsuario(Usuario usuario) {
+	public void agregarUsuario(CuentaUsuario usuario) {
 		usuarios.agregarUsuario(usuario);
 	}
 	
-	public void eliminarUsuario(Usuario usuario) {
+	public void eliminarUsuario(CuentaUsuario usuario) {
 		usuarios.eliminarUsuario(usuario);
 	}
 	
@@ -39,9 +39,6 @@ public class Congreso {
 		return charlas.obtenerL();
 	}
 	
-	public Hashtable<String, Persona> obtenerMaUs () {
-		return usuarios.obtenerM();
-	}
 	
 	public MapaAsientos obtenerMaAs () {
 		return asientos;
@@ -60,13 +57,10 @@ public class Congreso {
 		return charlas.buscarCharla(s);
 	}
 
-	public Usuario obtenerUsuario(String rut) {
-		return (Usuario)usuarios.buscarUsuario(rut);
+	public CuentaUsuario obtenerUsuario(String rut) {
+		return usuarios.buscarUsuario(rut);
 	}
 	
-	public Administrador obtenerAdmin (String rut) {
-		return (Administrador)usuarios.buscarUsuario(rut);
-	}
 	
 	public boolean existeUsuario (String rut) {
 		if (usuarios.buscarUsuario(rut)!=null) {
@@ -86,6 +80,10 @@ public class Congreso {
 	
 	public Charla obtenerCharlaid (String id) {
 		return charlas.buscarCharla(id);
+	}
+
+	public ArrayList<CuentaUsuario> listausuarios() {
+		return usuarios.listaUsuarios();
 	}
 	
 }

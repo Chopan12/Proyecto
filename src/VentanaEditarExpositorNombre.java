@@ -23,7 +23,7 @@ public class VentanaEditarExpositorNombre extends JFrame {
 	private JTextField NuevoNombre;
 	private JButton btnVolver;
 
-	public VentanaEditarExpositorNombre(Charla s, Congreso c,Administrador us) {
+	public VentanaEditarExpositorNombre(Charla s, Congreso c, CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

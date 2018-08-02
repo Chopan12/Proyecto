@@ -17,7 +17,7 @@ public class VentanaVerCharlas extends JFrame {
 	private JPanel contentPane;
 
 
-	public VentanaVerCharlas (Congreso c, Usuario us) {
+	public VentanaVerCharlas (Congreso c, CuentaUsuario us) {
 		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

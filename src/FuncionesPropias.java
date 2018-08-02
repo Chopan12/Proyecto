@@ -16,11 +16,11 @@ public class FuncionesPropias {
 		
 		for(String clave: m.obtenerClaves()) {
 
-			Persona us = m.buscarUsuario(clave);
+			CuentaUsuario us = m.buscarUsuario(clave);
 			
-			if (!us.esAdmin()) {
+			if (!us.getEsAdmin()) {
 			contCharlasYUsuarios[0]++;
-			Usuario aux = (Usuario)us;
+			CuentaUsuario aux = us;
 			ArrayList <Charla> listita = aux.getListaCharlas();
 			contCharlasYUsuarios[1]+=listita.size();
 			}
@@ -36,15 +36,12 @@ public class FuncionesPropias {
 		
 		int cont=0;
 		ListaCharlas l = new ListaCharlas(); 
-		Hashtable <String,Persona> usuarios = c.obtenerMaUs();
 		
 			Charla aux = l.buscarCharla(idCharla);
 	
-			for(String clave: usuarios.keySet()) {
-	        
-	        Persona us = usuarios.get(clave);
-	
-	        if (!us.esAdmin()) {
+			for(CuentaUsuario us : c.listausuarios()) {
+	        	
+	        if (!us.getEsAdmin()) {
 	        	cont++;
 	        }
 		}

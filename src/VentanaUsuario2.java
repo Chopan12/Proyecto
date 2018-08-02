@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -13,7 +14,7 @@ public class VentanaUsuario2 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	public VentanaUsuario2(Congreso c, Usuario us) {
+	public VentanaUsuario2(Congreso c, CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -17,7 +18,7 @@ public class VentanaIngresarFecha extends JFrame {
 	private JPanel contentPane;
 	private JTextField NuevaFecha;
 
-	public VentanaIngresarFecha(Charla s,Congreso c,Administrador us) {
+	public VentanaIngresarFecha(Charla s,Congreso c, CuentaUsuario us) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -40,6 +41,7 @@ public class VentanaIngresarFecha extends JFrame {
 		JButton btnContinuar = new JButton("Continuar");
 		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				s.setFecha(NuevaFecha.getText());
 				VentanaOpcionesEdicion ventanaOpcionesEdicion = new VentanaOpcionesEdicion (s,c,us);
 				setVisible(false);
